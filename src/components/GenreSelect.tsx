@@ -3,9 +3,13 @@ interface Props {
   selectedGenre: string;
   onSelect: (genre: string) => void;
 }
-export default function Genre({ genres, selectedGenre, onSelect }: Props) {
+export default function GenreSelect({
+  genres,
+  selectedGenre,
+  onSelect,
+}: Props) {
   return (
-    <div>
+    <nav>
       {genres.map((genre) => (
         <button
           key={genre}
@@ -15,6 +19,6 @@ export default function Genre({ genres, selectedGenre, onSelect }: Props) {
           {genre}
         </button>
       ))}
-    </div>
+    </nav>
   );
 }

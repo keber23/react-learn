@@ -1,7 +1,7 @@
 import "./App.css";
 import Counter from "./components/Counter";
 import Search from "./components/Search";
-import Genre from "./components/Genre";
+import Genre from "./components/GenreSelect";
 import { useState } from "react";
 
 function App() {
