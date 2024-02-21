@@ -9,7 +9,7 @@ export default function Search({ initialSearchText, onSearch }: Props) {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (inputElement.current!.value) onSearch(inputElement.current!.value);
+    if (inputElement.current) onSearch(inputElement.current.value);
   };
 
   return (
