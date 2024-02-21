@@ -1,21 +1,26 @@
-import { useState } from "react";
+import { FormEvent, useRef } from "react";
 
 interface Props {
-  intitialSearchText: string;
+  initialSearchText: string;
   onSearch: (searchText: string) => void;
 }
-export default function Search({ intitialSearchText, onSearch }: Props) {
-  const [searchText, setSearchText] = useState(intitialSearchText);
+export default function Search({ initialSearchText, onSearch }: Props) {
+  const inputElement = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onSearch(inputElement.current!.value);
+  };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && onSearch(searchText)}
+        placeholder="search..."
+        ref={inputElement}
+        defaultValue={initialSearchText}
       ></input>
-      <button onClick={() => onSearch(searchText)}>Search</button>
-    </div>
+      <button type="submit">Search</button>
+    </form>
   );
 }
