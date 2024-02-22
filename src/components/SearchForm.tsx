@@ -4,7 +4,7 @@ interface Props {
   initialSearchText: string;
   onSearch: (searchText: string) => void;
 }
-export default function Search({ initialSearchText, onSearch }: Props) {
+export default function SearchForm({ initialSearchText, onSearch }: Props) {
   const inputElement = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
