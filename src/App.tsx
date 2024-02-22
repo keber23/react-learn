@@ -28,17 +28,11 @@ function App() {
       <Counter initialValue={10}></Counter>
       <h1>SearchForm</h1>
       <Search initialSearchText="Search" onSearch={onSearch}></Search>
-      <Search initialSearchText="test" onSearch={onSearch}></Search>
       <h1>GenreSelect</h1>
       <Genre
-        genres={["Action", "Comedy", "Romance"]}
+        genres={["ALL", "DOCUMENTARY", "COMEDY", "HORROR", "CRIME"]}
         selectedGenre={selectedGenre1}
         onSelect={onSelect1}
-      ></Genre>
-      <Genre
-        genres={["Thriller", "Crime", "Western"]}
-        selectedGenre={selectedGenre2}
-        onSelect={onSelect2}
       ></Genre>
     </>
   );

@@ -1,4 +1,5 @@
 import { FormEvent, useRef } from "react";
+import styles from "./SearchForm.module.css";
 
 interface Props {
   initialSearchText: string;
@@ -15,12 +16,15 @@ export default function SearchForm({ initialSearchText, onSearch }: Props) {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        className={styles.input}
         type="text"
-        placeholder="search..."
+        placeholder="What do you want to watch?"
         ref={inputElement}
         defaultValue={initialSearchText}
       ></input>
-      <button type="submit">Search</button>
+      <button className={styles.button} type="submit">
+        SEARCH
+      </button>
     </form>
   );
 }
