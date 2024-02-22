@@ -1,18 +1,17 @@
-import Counter from "./components/Counter";
-import Search from "./components/SearchForm";
-import Genre from "./components/GenreSelect";
+import { Counter, GenreSelect, Genre, SearchForm } from "./components";
+
 import { useState } from "react";
 
 function App() {
-  const [selectedGenre1, setSelectedGenre1] = useState("Comedy");
+  const [selectedGenre, setSelectedGenre] = useState<Genre>("ALL");
 
   function onSearch(searchText: string) {
     console.log(searchText);
   }
 
-  function onSelect1(genre: string) {
+  function onSelect(genre: Genre) {
     console.log(genre);
-    setSelectedGenre1(genre);
+    setSelectedGenre(genre);
   }
 
   return (
@@ -21,13 +20,13 @@ function App() {
       <Counter initialValue={0}></Counter>
       <Counter initialValue={10}></Counter>
       <h1>SearchForm</h1>
-      <Search initialSearchText="Search" onSearch={onSearch}></Search>
+      <SearchForm initialSearchText="Search" onSearch={onSearch}></SearchForm>
       <h1>GenreSelect</h1>
-      <Genre
+      <GenreSelect
         genres={["ALL", "DOCUMENTARY", "COMEDY", "HORROR", "CRIME"]}
-        selectedGenre={selectedGenre1}
-        onSelect={onSelect1}
-      ></Genre>
+        selectedGenre={selectedGenre}
+        onSelect={onSelect}
+      ></GenreSelect>
     </>
   );
 }

@@ -1,9 +1,11 @@
-import styles from "./GenreSelect.module.css";
+import styles from "../Styles/GenreSelect.module.css";
+
+export type Genre = "ALL" | "DOCUMENTARY" | "COMEDY" | "HORROR" | "CRIME";
 
 interface Props {
-  genres: string[];
-  selectedGenre: string;
-  onSelect: (genre: string) => void;
+  genres: Genre[];
+  selectedGenre: Genre;
+  onSelect: (genre: Genre) => void;
 }
 export default function GenreSelect({
   genres,

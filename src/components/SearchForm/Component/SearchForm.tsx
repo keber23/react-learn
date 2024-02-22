@@ -1,5 +1,5 @@
 import { FormEvent, useRef } from "react";
-import styles from "./SearchForm.module.css";
+import styles from "../Styles/SearchForm.module.css";
 
 interface Props {
   initialSearchText: string;
