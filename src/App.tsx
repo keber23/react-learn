@@ -5,7 +5,6 @@ import { useState } from "react";
 
 function App() {
   const [selectedGenre1, setSelectedGenre1] = useState("Comedy");
-  const [selectedGenre2, setSelectedGenre2] = useState("Western");
 
   function onSearch(searchText: string) {
     console.log(searchText);
@@ -14,11 +13,6 @@ function App() {
   function onSelect1(genre: string) {
     console.log(genre);
     setSelectedGenre1(genre);
-  }
-
-  function onSelect2(genre: string) {
-    console.log(genre);
-    setSelectedGenre2(genre);
   }
 
   return (

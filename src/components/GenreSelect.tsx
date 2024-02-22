@@ -17,7 +17,9 @@ export default function GenreSelect({
           key={genre}
           onClick={() => onSelect(genre)}
           className={`${styles.button} ${
-            genre === selectedGenre ? styles.selected : ""
+            genre.toLowerCase() === selectedGenre.toLowerCase()
+              ? styles.selected
+              : ""
           }`}
         >
           {genre}
