@@ -18,7 +18,6 @@ function App() {
     <>
       <h1>Counters</h1>
       <Counter initialValue={0}></Counter>
-      <Counter initialValue={10}></Counter>
       <h1>SearchForm</h1>
       <SearchForm initialSearchText="Search" onSearch={onSearch}></SearchForm>
       <h1>GenreSelect</h1>
