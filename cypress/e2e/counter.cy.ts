@@ -1,6 +1,9 @@
 describe("Counter", () => {
   it("increments and decrements the counter correctly", () => {
-    cy.visit("http://localhost:3000/");
+    cy.visit("/");
+
+    cy.contains("button", "+").should("exist");
+    cy.contains("button", "-").should("exist");
 
     cy.get("div").contains("Value: 0").should("exist");
 

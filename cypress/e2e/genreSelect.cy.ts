@@ -1,12 +1,13 @@
 describe("GenreSelect", () => {
   it("selects a genre and triggers callback with correct genre", () => {
     const selectedGenre = "HORROR";
-    cy.visit("http://localhost:3000/", {
+    cy.visit("/", {
       onBeforeLoad(win) {
-        cy.stub(win.console, "log").as("consoleLog");
-        cy.stub(win.console, "error").as("consoleError");
+        cy.spy(win.console, "log").as("consoleLog");
+        cy.spy(win.console, "error").as("consoleError");
       },
     });
+    cy.contains("button", selectedGenre).should("exist");
 
     cy.contains("button", selectedGenre).click();
 
