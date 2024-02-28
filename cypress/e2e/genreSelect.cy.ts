@@ -11,9 +11,20 @@ describe("GenreSelect", () => {
 
     cy.contains("button", selectedGenre).click();
 
-    //this will not work with css module
-    //cy.contains('button', selectedGenre).should('have.class', 'selected');
+    cy.contains("button", selectedGenre)
+      .invoke("attr", "class")
+      .should("match", /GenreSelect_selected__/);
+
+    //this actually always returns true even if it is not selected
+    //cy.contains("button", selectedGenre).should("have.css", "border-bottom");
 
     cy.get("@consoleLog").should("be.calledWith", selectedGenre);
+
+    cy.get('[data-cy="comedy"]').click();
+    cy.get('[data-cy="comedy"]')
+      .invoke("attr", "class")
+      .should("match", /GenreSelect_selected__/);
+
+    cy.get('[data-cy="comedy"]').should("have.css", "border-bottom");
   });
 });

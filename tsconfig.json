@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["es5", "dom", "dom.iterable", "esnext"],
-    "types": ["node", "cypress"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -17,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "cypress"]
+  "include": ["src", "cypress.d.ts"]
 }

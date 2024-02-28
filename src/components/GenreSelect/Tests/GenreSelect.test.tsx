@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import GenreSelect, { Genre } from "../Component/GenreSelect";
+import GenreSelect, { Genre, genres } from "../Component/GenreSelect";
 
-const genres: Genre[] = ["ALL", "DOCUMENTARY", "COMEDY", "HORROR", "CRIME"];
 const selectedGenre: Genre = "COMEDY";
 
 test("component renders all genres passed in props", () => {
