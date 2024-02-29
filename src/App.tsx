@@ -1,6 +1,7 @@
 import { Counter, GenreSelect, Genre, SearchForm } from "./components";
 
 import { useState } from "react";
+import { genres } from "./components/GenreSelect/Component/GenreSelect";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre>("ALL");
@@ -18,12 +19,11 @@ function App() {
     <>
       <h1>Counters</h1>
       <Counter initialValue={0}></Counter>
-      <Counter initialValue={10}></Counter>
       <h1>SearchForm</h1>
       <SearchForm initialSearchText="Search" onSearch={onSearch}></SearchForm>
       <h1>GenreSelect</h1>
       <GenreSelect
-        genres={["ALL", "DOCUMENTARY", "COMEDY", "HORROR", "CRIME"]}
+        genres={genres}
         selectedGenre={selectedGenre}
         onSelect={onSelect}
       ></GenreSelect>
