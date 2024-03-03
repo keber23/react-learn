@@ -1,0 +1,90 @@
+.movieTile {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: black;
+  width: 250px;
+  height: 300px;
+}
+
+.poster {
+  width: 200px;
+}
+
+.poster img {
+  width: 100%;
+  height: auto;
+}
+
+.info {
+  flex-grow: 1;
+  color: white;
+}
+
+.info h2 {
+  margin: 0;
+  font-size: 20px;
+  text-align: left;
+  display: inline-block;
+}
+
+.info p {
+  margin: 5px 0;
+}
+
+.contextMenuButton {
+  position: absolute; /* Position the button absolutely */
+  top: 5px; /* Adjust top position */
+  right: 5px; /* Adjust right position */
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.contextMenu {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  background-color: black;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.contextMenuItem {
+  display: block;
+  color: #ffffff;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contextMenuItem:hover {
+  background-color: red;
+}
+
+.releaseYear {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 45px;
+  text-align: center;
+  margin-left: 20px;
+}
+
+.genres {
+  color: grey;
+  font-size: small;
+}

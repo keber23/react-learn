@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import GenreSelect, { Genre, genres } from "../Component/GenreSelect";
+import GenreSelect, { genres } from "../Component/GenreSelect";
+import { Genre } from "../../Types/genre";
 
 const selectedGenre: Genre = "COMEDY";
 
