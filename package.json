@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@storybook/addon-postcss": "^2.0.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -24,12 +25,15 @@
     "cy:open": "cypress open",
     "cypress:open": "start-server-and-test start http://localhost:3000 cy:open",
     "cy:run": "cypress run",
-    "cypress:run": "start-server-and-test start http://localhost:3000 cy:run"
+    "cypress:run": "start-server-and-test start http://localhost:3000 cy:run",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:storybook/recommended"
     ]
   },
   "browserslist": {
@@ -45,7 +49,20 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.6.17",
+    "@storybook/addon-interactions": "^7.6.17",
+    "@storybook/addon-links": "^7.6.17",
+    "@storybook/addon-onboarding": "^1.0.11",
+    "@storybook/blocks": "^7.6.17",
+    "@storybook/preset-create-react-app": "^7.6.17",
+    "@storybook/react": "^7.6.17",
+    "@storybook/react-webpack5": "^7.6.17",
+    "@storybook/test": "^7.6.17",
     "cypress": "^13.6.6",
-    "start-server-and-test": "^2.0.3"
+    "eslint-plugin-storybook": "^0.8.0",
+    "start-server-and-test": "^2.0.3",
+    "storybook": "^7.6.17",
+    "storybook-css-modules-preset": "^1.1.1",
+    "webpack": "^5.90.3"
   }
 }

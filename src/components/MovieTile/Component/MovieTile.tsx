@@ -19,12 +19,14 @@ export default function MovieTile({ movie, onClick, onEdit, onDelete }: Props) {
     setIsContextMenuOpen(true);
   };
 
-  const handleEditClick = () => {
+  const handleEditClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     onEdit(movie);
     setIsContextMenuOpen(false);
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     onDelete(movie);
     setIsContextMenuOpen(false);
   };

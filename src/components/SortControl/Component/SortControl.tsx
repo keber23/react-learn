@@ -22,7 +22,7 @@ export default function SortControl({
       </label>
       <select
         id="sort"
-        value={currentSelection}
+        defaultValue={currentSelection}
         onChange={handleSelectionChange}
         className={styles.select}
       >
