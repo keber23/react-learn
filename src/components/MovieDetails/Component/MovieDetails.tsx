@@ -7,29 +7,29 @@ interface Props {
 
 export default function MovieDetails({ movie }: Props) {
   const {
-    imageUrl,
-    movieName,
-    releaseYear,
-    rating,
-    duration,
-    description,
+    poster_path,
+    title,
+    release_date,
+    vote_average,
+    runtime,
+    overview,
     genres,
   } = movie;
 
   return (
     <div className={styles.movieDetails}>
       <div className={styles.poster}>
-        <img src={imageUrl} alt={movieName} />
+        <img src={poster_path} alt={title} />
       </div>
       <div className={styles.info}>
-        <h2>{movieName}</h2>
-        <span className={styles.rating}>{rating}</span> {/* Move rating here */}
+        <h2>{title}</h2>
+        <span className={styles.rating}>{vote_average}</span>
         <p className={styles.genres}>{genres?.join(", ")}</p>
         <p>
-          <span className={styles.releaseYear}>{releaseYear}</span>
-          <span className={styles.duration}>{duration}</span>
+          <span className={styles.release_date}>{release_date}</span>
+          <span className={styles.duration}>{runtime}</span>
         </p>
-        <p>{description}</p>
+        <p>{overview}</p>
       </div>
     </div>
   );

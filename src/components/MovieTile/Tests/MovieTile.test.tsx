@@ -3,9 +3,9 @@ import MovieTile from "../Component/MovieTile";
 
 describe("MovieTile", () => {
   const movie = {
-    imageUrl: "https://example.com/image.jpg",
-    movieName: "Example Movie",
-    releaseYear: 2022,
+    poster_path: "https://example.com/image.jpg",
+    title: "Example Movie",
+    release_date: "2022",
     genres: ["Action", "Adventure"],
   };
 
@@ -24,9 +24,9 @@ describe("MovieTile", () => {
     );
 
     // Check if movie information is rendered correctly
-    expect(screen.getByAltText(movie.movieName)).toBeInTheDocument();
-    expect(screen.getByText(movie.movieName)).toBeInTheDocument();
-    expect(screen.getByText(`${movie.releaseYear}`)).toBeInTheDocument();
+    expect(screen.getByAltText(movie.title)).toBeInTheDocument();
+    expect(screen.getByText(movie.title)).toBeInTheDocument();
+    expect(screen.getByText(`${movie.release_date}`)).toBeInTheDocument();
     expect(screen.getByText(`${movie.genres.join(", ")}`)).toBeInTheDocument();
   });
 
@@ -40,7 +40,7 @@ describe("MovieTile", () => {
       />
     );
 
-    fireEvent.click(screen.getByText(movie.movieName));
+    fireEvent.click(screen.getByText(movie.title));
     expect(onClick).toHaveBeenCalledWith(movie);
   });
 

@@ -3,12 +3,12 @@ import MovieDetails from "../Component/MovieDetails";
 
 describe("MovieDetails", () => {
   const movie = {
-    imageUrl: "https://example.com/image.jpg",
-    movieName: "Example Movie",
-    releaseYear: 2022,
-    rating: 8.5,
-    duration: "2h 30min",
-    description: "This is an example movie description.",
+    poster_path: "https://example.com/image.jpg",
+    title: "Example Movie",
+    release_date: "2022",
+    vote_average: 8.5,
+    runtime: 150,
+    overview: "This is an example movie description.",
     genres: ["Action", "Adventure"],
   };
 
@@ -16,12 +16,12 @@ describe("MovieDetails", () => {
     render(<MovieDetails movie={movie} />);
 
     // Check if movie details are rendered correctly
-    expect(screen.getByAltText(movie.movieName)).toBeInTheDocument();
-    expect(screen.getByText(movie.movieName)).toBeInTheDocument();
-    expect(screen.getByText(movie.releaseYear)).toBeInTheDocument();
-    expect(screen.getByText(movie.rating)).toBeInTheDocument();
-    expect(screen.getByText(movie.duration)).toBeInTheDocument();
-    expect(screen.getByText(movie.description)).toBeInTheDocument();
+    expect(screen.getByAltText(movie.title)).toBeInTheDocument();
+    expect(screen.getByText(movie.title)).toBeInTheDocument();
+    expect(screen.getByText(movie.release_date)).toBeInTheDocument();
+    expect(screen.getByText(movie.vote_average)).toBeInTheDocument();
+    expect(screen.getByText(movie.runtime)).toBeInTheDocument();
+    expect(screen.getByText(movie.overview)).toBeInTheDocument();
     expect(screen.getByText(movie.genres.join(", "))).toBeInTheDocument();
   });
 });

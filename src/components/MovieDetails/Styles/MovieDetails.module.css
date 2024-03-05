@@ -37,14 +37,14 @@
 
 .rating {
   display: inline-block;
-  background-color: #333; /* Rating circle background color */
+  background-color: #333;
   color: white;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   text-align: center;
   line-height: 30px;
-  margin-left: 10px; /* Add margin between rating and release year */
+  margin-left: 10px;
   border: 1px solid white;
 }
 

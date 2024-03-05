@@ -46,12 +46,12 @@ function App() {
 
   // Sample movie data
   const movie = {
-    imageUrl: "https://picsum.photos/id/1/200/200",
-    movieName: "Example Movie",
-    releaseYear: 2022,
-    rating: 8.5,
+    poster_path: "https://picsum.photos/id/1/200/200",
+    title: "Example Movie",
+    release_date: "2022",
+    vote_average: 8.5,
     duration: "2h 30min",
-    description: "This is an example movie description.",
+    overview: "This is an example movie description.",
     genres: ["Action", "Adventure"],
   };
 

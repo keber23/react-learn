@@ -4,12 +4,12 @@ import { MovieDetails } from "../components";
 import { Movie } from "../components/Types/movie";
 
 const mockMovie: Movie = {
-  imageUrl: "https://via.placeholder.com/150",
-  movieName: "Sample Movie",
-  releaseYear: 2022,
-  rating: 8.5,
-  duration: "2h 30min",
-  description: "This is an example movie description.",
+  poster_path: "https://via.placeholder.com/150",
+  title: "Sample Movie",
+  release_date: "2022",
+  vote_average: 8.5,
+  runtime: 150,
+  overview: "This is an example movie description.",
   genres: ["Action", "Adventure"],
 };
 
@@ -36,7 +36,7 @@ export const NoImage: Story = {
   args: {
     movie: {
       ...mockMovie,
-      imageUrl: "",
+      poster_path: "",
     },
   },
 };
