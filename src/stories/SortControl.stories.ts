@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { SortControl } from "../components";
-import { displayValues } from "../components/SortControl/Component/SortControl";
+import { sortOptions } from "../components/SortControl/Component/SortControl";
 const meta = {
   title: "EPAM React/SortControl",
   component: SortControl,
@@ -17,20 +17,20 @@ type Story = StoryObj<typeof meta>;
 
 export const EmptySelection: Story = {
   args: {
-    displayValues: displayValues,
+    sortOptions: sortOptions,
   },
 };
 
 export const ReleaseDateSelection: Story = {
   args: {
-    displayValues: displayValues,
-    initialSelection: displayValues[0],
+    sortOptions: sortOptions,
+    initialSelection: sortOptions[0],
   },
 };
 
 export const TitleSelection: Story = {
   args: {
-    displayValues: displayValues,
-    initialSelection: displayValues[1],
+    sortOptions: sortOptions,
+    initialSelection: sortOptions[1],
   },
 };

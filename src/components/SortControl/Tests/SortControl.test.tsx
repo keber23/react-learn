@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import SortControl from "../Component/SortControl";
-import { displayValues } from "../Component/SortControl";
+import { sortOptions } from "../Component/SortControl";
 
 describe("SortControl", () => {
   let onSelectionChange: jest.Mock;
@@ -9,12 +9,12 @@ describe("SortControl", () => {
     onSelectionChange = jest.fn();
   });
 
-  test.each(displayValues)(
+  test.each(sortOptions)(
     "renders with initial selection '%s' correctly",
     (currentSelection) => {
       render(
         <SortControl
-          displayValues={displayValues}
+          sortOptions={sortOptions}
           initialSelection={currentSelection}
           onSelectionChange={onSelectionChange}
         />
@@ -33,13 +33,13 @@ describe("SortControl", () => {
   test("calls onSelectionChange with new value when select value changes", () => {
     render(
       <SortControl
-        displayValues={displayValues}
-        initialSelection={displayValues[0]}
+        sortOptions={sortOptions}
+        initialSelection={sortOptions[0]}
         onSelectionChange={onSelectionChange}
       />
     );
     const selectElement = screen.getByLabelText<HTMLSelectElement>("Sort by:");
-    const newSelection = displayValues[1];
+    const newSelection = sortOptions[1];
     userEvent.selectOptions(selectElement, newSelection.value);
     expect(onSelectionChange).toHaveBeenCalledWith(newSelection);
 
