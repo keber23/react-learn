@@ -52,7 +52,7 @@ function App() {
   const movie: Movie = {
     posterPath: "https://picsum.photos/id/1/200/200",
     title: "Example Movie",
-    releaseDate: "2022",
+    releaseDate: "2022-05-14",
     voteAverage: 8.5,
     runtime: 150,
     overview: "This is an example movie description.",

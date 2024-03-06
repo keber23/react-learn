@@ -1,3 +1,4 @@
+import { extractYear } from "../../../utils/extractYear";
 import { formatDuration } from "../../../utils/formatDuration";
 import { Movie } from "../../Types/movie";
 import styles from "../Styles/MovieDetails.module.css";
@@ -29,7 +30,9 @@ export default function MovieDetails({ movie }: Props) {
         <span className={styles.rating}>{voteAverage}</span>
         <p className={styles.genres}>{genres?.join(", ")}</p>
         <p>
-          <span className={styles["release-date"]}>{releaseDate}</span>
+          <span className={styles["release-date"]}>
+            {extractYear(releaseDate)}
+          </span>
           <span className={styles.duration}>{formatDuration(runtime)}</span>
         </p>
         <p>{overview}</p>

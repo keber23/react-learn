@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Movie } from "../../Types/movie";
 import styles from "../Styles/MovieTile.module.css";
+import { extractYear } from "../../../utils/extractYear";
 interface Props {
   movie: Movie;
   onClick: (movie: Movie) => void;
@@ -44,7 +45,7 @@ export default function MovieTile({ movie, onClick, onEdit, onDelete }: Props) {
       </div>
       <div className={styles.info}>
         <h2>{title}</h2>
-        <span className={styles.releaseYear}>{releaseDate}</span>
+        <span className={styles.releaseYear}>{extractYear(releaseDate)}</span>
         <p className={styles.genres}>{genres?.join(", ")}</p>
       </div>
       <button

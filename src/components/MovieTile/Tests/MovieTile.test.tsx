@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import MovieTile from "../Component/MovieTile";
 import { Movie } from "../../Types/movie";
+import { extractYear } from "../../../utils/extractYear";
 
 describe("MovieTile", () => {
   let onClick: jest.Mock;
@@ -16,7 +17,7 @@ describe("MovieTile", () => {
     movie = {
       posterPath: "https://example.com/image.jpg",
       title: "Example Movie",
-      releaseDate: "2022",
+      releaseDate: "2022-09-30",
       genres: ["Action", "Adventure"],
     };
   });
@@ -34,7 +35,9 @@ describe("MovieTile", () => {
     // Check if movie information is rendered correctly
     expect(screen.getByAltText(movie.title!)).toBeInTheDocument();
     expect(screen.getByText(movie.title!)).toBeInTheDocument();
-    expect(screen.getByText(`${movie.releaseDate}`)).toBeInTheDocument();
+    expect(
+      screen.getByText(extractYear(movie.releaseDate))
+    ).toBeInTheDocument();
     expect(screen.getByText(`${movie.genres?.join(", ")}`)).toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
