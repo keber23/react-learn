@@ -6,14 +6,18 @@ import {
   SortControl,
   MovieTile,
   MovieDetails,
+  SortOption,
+  Movie,
 } from "./components";
 import { useState } from "react";
 import { genres } from "./components/GenreSelect/Component/GenreSelect";
-import { Movie } from "./components/Types/movie";
+import { displayValues } from "./components/SortControl/Component/SortControl";
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre>("ALL");
-  const [selectedSort, setSelectedSort] = useState("releaseDate");
+  const [selectedGenre, setSelectedGenre] = useState<Genre>(genres[0]);
+  const [selectedSort, setSelectedSort] = useState<SortOption>(
+    displayValues[0]
+  );
 
   function onSearch(searchText: string) {
     console.log(searchText);
@@ -24,7 +28,7 @@ function App() {
     setSelectedGenre(genre);
   }
 
-  const handleSortChange = (newSort: string) => {
+  const handleSortChange = (newSort: SortOption) => {
     console.log("New sortOrder:", newSort);
     setSelectedSort(newSort);
   };
@@ -45,12 +49,12 @@ function App() {
   };
 
   // Sample movie data
-  const movie = {
+  const movie: Movie = {
     poster_path: "https://picsum.photos/id/1/200/200",
     title: "Example Movie",
     release_date: "2022",
     vote_average: 8.5,
-    duration: "2h 30min",
+    runtime: 150,
     overview: "This is an example movie description.",
     genres: ["Action", "Adventure"],
   };
@@ -69,7 +73,8 @@ function App() {
       ></GenreSelect>
       <h1>SortControl</h1>
       <SortControl
-        currentSelection={selectedSort}
+        displayValues={displayValues}
+        initialSelection={selectedSort}
         onSelectionChange={handleSortChange}
       />
       <div className="movie-container">

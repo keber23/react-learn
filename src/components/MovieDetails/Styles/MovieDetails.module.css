@@ -17,12 +17,12 @@
 .info {
   flex-grow: 1;
   padding: 20px;
-  color: white; /* Set text color to white */
+  color: white;
 }
 
 .info h2 {
   margin: 0;
-  font-size: 28px; /* Increase font size */
+  font-size: 28px;
   display: inline-block;
 }
 
@@ -48,7 +48,7 @@
   border: 1px solid white;
 }
 
-.releaseYear {
+.release_date {
   color: red;
 }
 

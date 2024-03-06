@@ -38,9 +38,9 @@
 }
 
 .contextMenuButton {
-  position: absolute; /* Position the button absolutely */
-  top: 5px; /* Adjust top position */
-  right: 5px; /* Adjust right position */
+  position: absolute;
+  top: 5px;
+  right: 5px;
   background-color: transparent;
   border: none;
   color: #ffffff;

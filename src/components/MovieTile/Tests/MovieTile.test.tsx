@@ -1,17 +1,25 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import MovieTile from "../Component/MovieTile";
+import { Movie } from "../../Types/movie";
 
 describe("MovieTile", () => {
-  const movie = {
-    poster_path: "https://example.com/image.jpg",
-    title: "Example Movie",
-    release_date: "2022",
-    genres: ["Action", "Adventure"],
-  };
+  let onClick: jest.Mock;
+  let onEdit: jest.Mock;
+  let onDelete: jest.Mock;
+  let movie: Movie;
 
-  const onClick = jest.fn();
-  const onEdit = jest.fn();
-  const onDelete = jest.fn();
+  beforeEach(() => {
+    onClick = jest.fn();
+    onEdit = jest.fn();
+    onDelete = jest.fn();
+
+    movie = {
+      poster_path: "https://example.com/image.jpg",
+      title: "Example Movie",
+      release_date: "2022",
+      genres: ["Action", "Adventure"],
+    };
+  });
 
   test("renders movie information correctly", () => {
     render(
@@ -28,6 +36,8 @@ describe("MovieTile", () => {
     expect(screen.getByText(movie.title)).toBeInTheDocument();
     expect(screen.getByText(`${movie.release_date}`)).toBeInTheDocument();
     expect(screen.getByText(`${movie.genres.join(", ")}`)).toBeInTheDocument();
+    expect(screen.queryByText("Edit")).not.toBeInTheDocument();
+    expect(screen.queryByText("Delete")).not.toBeInTheDocument();
   });
 
   test("calls onClick callback when clicked", () => {
@@ -55,8 +65,13 @@ describe("MovieTile", () => {
     );
 
     fireEvent.click(screen.getByText("..."));
+    expect(screen.getByText("Edit")).toBeInTheDocument();
+    expect(screen.getByText("Delete")).toBeInTheDocument();
+
     fireEvent.click(screen.getByText("Edit"));
     expect(onEdit).toHaveBeenCalledWith(movie);
+    expect(screen.queryByText("Edit")).not.toBeInTheDocument();
+    expect(screen.queryByText("Delete")).not.toBeInTheDocument();
   });
 
   test("calls onDelete callback when Delete button in context menu is clicked", () => {
@@ -70,7 +85,12 @@ describe("MovieTile", () => {
     );
 
     fireEvent.click(screen.getByText("..."));
+    expect(screen.getByText("Edit")).toBeInTheDocument();
+    expect(screen.getByText("Delete")).toBeInTheDocument();
+
     fireEvent.click(screen.getByText("Delete"));
     expect(onDelete).toHaveBeenCalledWith(movie);
+    expect(screen.queryByText("Edit")).not.toBeInTheDocument();
+    expect(screen.queryByText("Delete")).not.toBeInTheDocument();
   });
 });

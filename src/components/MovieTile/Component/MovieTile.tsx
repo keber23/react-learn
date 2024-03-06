@@ -12,6 +12,8 @@ export default function MovieTile({ movie, onClick, onEdit, onDelete }: Props) {
   const { poster_path, title, release_date, genres } = movie;
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 
+  const defaultPosterUrl = "https://via.placeholder.com/150"; // Default image URL
+
   const handleContextMenuButtonClick = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -38,7 +40,7 @@ export default function MovieTile({ movie, onClick, onEdit, onDelete }: Props) {
   return (
     <div className={styles.movieTile} onClick={handleClick}>
       <div className={styles.poster}>
-        <img src={poster_path} alt={title} />
+        <img src={poster_path || defaultPosterUrl} alt={title} />
       </div>
       <div className={styles.info}>
         <h2>{title}</h2>

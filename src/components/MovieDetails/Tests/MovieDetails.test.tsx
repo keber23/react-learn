@@ -1,8 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import MovieDetails from "../Component/MovieDetails";
+import { formatDuration } from "../../../utils/formatDuration";
+import { Movie } from "../../Types/movie";
 
 describe("MovieDetails", () => {
-  const movie = {
+  let movie: Movie = {
     poster_path: "https://example.com/image.jpg",
     title: "Example Movie",
     release_date: "2022",
@@ -20,7 +22,7 @@ describe("MovieDetails", () => {
     expect(screen.getByText(movie.title)).toBeInTheDocument();
     expect(screen.getByText(movie.release_date)).toBeInTheDocument();
     expect(screen.getByText(movie.vote_average)).toBeInTheDocument();
-    expect(screen.getByText(movie.runtime)).toBeInTheDocument();
+    expect(screen.getByText(formatDuration(movie.runtime))).toBeInTheDocument();
     expect(screen.getByText(movie.overview)).toBeInTheDocument();
     expect(screen.getByText(movie.genres.join(", "))).toBeInTheDocument();
   });
