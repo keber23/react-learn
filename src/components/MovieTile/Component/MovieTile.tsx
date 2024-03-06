@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function MovieTile({ movie, onClick, onEdit, onDelete }: Props) {
-  const { poster_path, title, release_date, genres } = movie;
+  const { posterPath, title, releaseDate, genres } = movie;
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 
   const defaultPosterUrl = "https://via.placeholder.com/150"; // Default image URL
@@ -40,11 +40,11 @@ export default function MovieTile({ movie, onClick, onEdit, onDelete }: Props) {
   return (
     <div className={styles.movieTile} onClick={handleClick}>
       <div className={styles.poster}>
-        <img src={poster_path || defaultPosterUrl} alt={title} />
+        <img src={posterPath || defaultPosterUrl} alt={title} />
       </div>
       <div className={styles.info}>
         <h2>{title}</h2>
-        <span className={styles.releaseYear}>{release_date}</span>
+        <span className={styles.releaseYear}>{releaseDate}</span>
         <p className={styles.genres}>{genres?.join(", ")}</p>
       </div>
       <button

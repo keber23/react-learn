@@ -4,9 +4,9 @@ import { MovieTile } from "../components";
 import { Movie } from "../components/Types/movie";
 
 const mockMovie: Movie = {
-  poster_path: "https://via.placeholder.com/150",
+  posterPath: "https://via.placeholder.com/150",
   title: "Sample Movie",
-  release_date: "2022",
+  releaseDate: "2022",
   genres: ["Action", "Adventure"],
 };
 
@@ -33,7 +33,7 @@ export const NoImage: Story = {
   args: {
     movie: {
       ...mockMovie,
-      poster_path: "",
+      posterPath: "",
     },
   },
 };

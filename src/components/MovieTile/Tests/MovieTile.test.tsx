@@ -14,9 +14,9 @@ describe("MovieTile", () => {
     onDelete = jest.fn();
 
     movie = {
-      poster_path: "https://example.com/image.jpg",
+      posterPath: "https://example.com/image.jpg",
       title: "Example Movie",
-      release_date: "2022",
+      releaseDate: "2022",
       genres: ["Action", "Adventure"],
     };
   });
@@ -32,10 +32,10 @@ describe("MovieTile", () => {
     );
 
     // Check if movie information is rendered correctly
-    expect(screen.getByAltText(movie.title)).toBeInTheDocument();
-    expect(screen.getByText(movie.title)).toBeInTheDocument();
-    expect(screen.getByText(`${movie.release_date}`)).toBeInTheDocument();
-    expect(screen.getByText(`${movie.genres.join(", ")}`)).toBeInTheDocument();
+    expect(screen.getByAltText(movie.title!)).toBeInTheDocument();
+    expect(screen.getByText(movie.title!)).toBeInTheDocument();
+    expect(screen.getByText(`${movie.releaseDate}`)).toBeInTheDocument();
+    expect(screen.getByText(`${movie.genres?.join(", ")}`)).toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
   });
@@ -50,7 +50,7 @@ describe("MovieTile", () => {
       />
     );
 
-    fireEvent.click(screen.getByText(movie.title));
+    fireEvent.click(screen.getByText(movie.title!));
     expect(onClick).toHaveBeenCalledWith(movie);
   });
 

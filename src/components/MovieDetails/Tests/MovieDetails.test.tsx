@@ -5,10 +5,10 @@ import { Movie } from "../../Types/movie";
 
 describe("MovieDetails", () => {
   let movie: Movie = {
-    poster_path: "https://example.com/image.jpg",
+    posterPath: "https://example.com/image.jpg",
     title: "Example Movie",
-    release_date: "2022",
-    vote_average: 8.5,
+    releaseDate: "2022",
+    voteAverage: 8.5,
     runtime: 150,
     overview: "This is an example movie description.",
     genres: ["Action", "Adventure"],
@@ -18,12 +18,12 @@ describe("MovieDetails", () => {
     render(<MovieDetails movie={movie} />);
 
     // Check if movie details are rendered correctly
-    expect(screen.getByAltText(movie.title)).toBeInTheDocument();
-    expect(screen.getByText(movie.title)).toBeInTheDocument();
-    expect(screen.getByText(movie.release_date)).toBeInTheDocument();
-    expect(screen.getByText(movie.vote_average)).toBeInTheDocument();
+    expect(screen.getByAltText(movie.title!)).toBeInTheDocument();
+    expect(screen.getByText(movie.title!)).toBeInTheDocument();
+    expect(screen.getByText(movie.releaseDate!)).toBeInTheDocument();
+    expect(screen.getByText(movie.voteAverage!)).toBeInTheDocument();
     expect(screen.getByText(formatDuration(movie.runtime))).toBeInTheDocument();
-    expect(screen.getByText(movie.overview)).toBeInTheDocument();
-    expect(screen.getByText(movie.genres.join(", "))).toBeInTheDocument();
+    expect(screen.getByText(movie.overview!)).toBeInTheDocument();
+    expect(screen.getByText(`${movie.genres?.join(", ")}`)).toBeInTheDocument();
   });
 });
