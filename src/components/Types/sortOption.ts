@@ -1,4 +1,1 @@
-export interface SortOption {
-  value: string;
-  label: string;
-}
+export type SortOption = "releaseDate" | "title";

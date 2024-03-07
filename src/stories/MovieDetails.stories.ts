@@ -4,7 +4,7 @@ import { MovieDetails } from "../components";
 import { Movie } from "../components/Types/movie";
 
 const mockMovie: Movie = {
-  posterPath: "https://via.placeholder.com/150",
+  posterPath: "https://picsum.photos/id/1/200/200",
   title: "Sample Movie",
   releaseDate: "2022-09-21",
   voteAverage: 8.5,

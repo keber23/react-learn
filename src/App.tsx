@@ -11,11 +11,10 @@ import {
 } from "./components";
 import { useState } from "react";
 import { genres } from "./components/GenreSelect/Component/GenreSelect";
-import { sortOptions } from "./components/SortControl/Component/SortControl";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre>(genres[0]);
-  const [selectedSort, setSelectedSort] = useState<SortOption>(sortOptions[0]);
+  const [selectedSort, setSelectedSort] = useState<SortOption>();
 
   function onSearch(searchText: string) {
     console.log(searchText);
@@ -71,7 +70,6 @@ function App() {
       ></GenreSelect>
       <h1>SortControl</h1>
       <SortControl
-        sortOptions={sortOptions}
         initialSelection={selectedSort}
         onSelectionChange={handleSortChange}
       />

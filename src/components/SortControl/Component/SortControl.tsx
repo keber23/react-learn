@@ -2,13 +2,7 @@ import { ChangeEvent } from "react";
 import styles from "../Styles/SortControl.module.css";
 import { SortOption } from "../../Types/sortOption";
 
-export const sortOptions: SortOption[] = [
-  { value: "releaseDate", label: "Release Date" },
-  { value: "title", label: "Title" },
-];
-
 interface Props {
-  sortOptions: SortOption[];
   initialSelection?: SortOption;
   onSelectionChange: (newSelection: SortOption) => void;
 }
@@ -18,10 +12,8 @@ export default function SortControl({
   onSelectionChange,
 }: Props) {
   const handleSelectionChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const newSelection = sortOptions.find(
-      (option) => option.value === event.target.value
-    );
-    if (newSelection) onSelectionChange(newSelection);
+    const selectedOption: SortOption = event.target.value as SortOption;
+    onSelectionChange(selectedOption);
   };
 
   return (
@@ -31,15 +23,12 @@ export default function SortControl({
       </label>
       <select
         id="sort"
-        defaultValue={initialSelection?.value}
+        defaultValue={initialSelection || "releaseDate"}
         onChange={handleSelectionChange}
         className={styles.select}
       >
-        {sortOptions.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
+        <option value="releaseDate">Release Date</option>
+        <option value="title">Title</option>
       </select>
     </div>
   );
