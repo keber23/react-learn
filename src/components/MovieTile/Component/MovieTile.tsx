@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Movie } from "../../Types/movie";
 import styles from "../Styles/MovieTile.module.css";
 import { extractYear } from "../../../utils/extractYear";
-import defaultPosterUrl from "../../Images/200.png";
+import defaultPosterUrl from "../../../assets/Images/200.png";
+
 interface Props {
   movie: Movie;
   onClick: (movie: Movie) => void;
@@ -43,14 +44,14 @@ export default function MovieTile({ movie, onClick, onEdit, onDelete }: Props) {
         <img
           src={posterPath || defaultPosterUrl}
           alt={title}
-          style={{ width: "200px", height: "200px" }}
+          style={{ width: "322px", height: "455px" }}
         />
       </div>
       <div className={styles.info}>
         <h2>{title}</h2>
         <span className={styles.releaseYear}>{extractYear(releaseDate)}</span>
-        <p className={styles.genres}>{genres?.join(", ")}</p>
       </div>
+      <p className={styles.genres}>{genres?.join(", ")}</p>
       <button
         className={styles.contextMenuButton}
         onClick={handleContextMenuButtonClick}

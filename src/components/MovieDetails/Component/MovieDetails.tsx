@@ -2,7 +2,7 @@ import { extractYear } from "../../../utils/extractYear";
 import { formatDuration } from "../../../utils/formatDuration";
 import { Movie } from "../../Types/movie";
 import styles from "../Styles/MovieDetails.module.css";
-import defaultPosterUrl from "../../Images/200.png";
+import defaultPosterUrl from "../../../assets/Images/200.png";
 interface Props {
   movie: Movie;
 }
@@ -24,7 +24,7 @@ export default function MovieDetails({ movie }: Props) {
         <img
           src={posterPath || defaultPosterUrl}
           alt={title}
-          style={{ width: "200px", height: "200px" }}
+          style={{ width: "323", height: "486px" }}
         />
       </div>
       <div className={styles.info}>

@@ -1,35 +1,24 @@
 .movieTile {
-  display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
-  border: 1px solid #ccc;
+  padding: 0px;
   margin-bottom: 10px;
   cursor: pointer;
   background-color: black;
-  width: 250px;
-  height: 300px;
-}
-
-.poster {
-  width: 200px;
-}
-
-.poster img {
-  width: 100%;
-  height: auto;
+  width: 323px;
+  height: 510px;
 }
 
 .info {
-  flex-grow: 1;
+  display: flex;
   color: white;
+  justify-content: space-between;
 }
 
 .info h2 {
   margin: 0;
   font-size: 20px;
-  text-align: left;
   display: inline-block;
 }
 
@@ -37,15 +26,35 @@
   margin: 5px 0;
 }
 
+.releaseYear {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 45px;
+  text-align: center;
+  margin: 1px;
+}
+
+.genres {
+  color: grey;
+  font-size: small;
+  margin: 1px;
+}
+
 .contextMenuButton {
   position: absolute;
   top: 5px;
   right: 5px;
-  background-color: transparent;
+  background-color: black;
   border: none;
   color: #ffffff;
   font-size: 18px;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .contextMenu {
@@ -55,7 +64,6 @@
   background-color: black;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 10;
 }
 
@@ -72,19 +80,4 @@
 
 .contextMenuItem:hover {
   background-color: red;
-}
-
-.releaseYear {
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 45px;
-  text-align: center;
-  margin-left: 20px;
-}
-
-.genres {
-  color: grey;
-  font-size: small;
 }
