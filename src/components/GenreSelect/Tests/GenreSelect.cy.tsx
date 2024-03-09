@@ -1,5 +1,5 @@
-import React from "react";
-import GenreSelect, { Genre, genres } from "../Component/GenreSelect";
+import GenreSelect, { genres } from "../Component/GenreSelect";
+import { Genre } from "../../Types/genre";
 
 genres.forEach((genre) => {
   describe("selected genre is " + genre, () => {

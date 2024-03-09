@@ -1,6 +1,5 @@
+import { Genre } from "../../Types/genre";
 import styles from "../Styles/GenreSelect.module.css";
-
-export type Genre = "ALL" | "DOCUMENTARY" | "COMEDY" | "HORROR" | "CRIME";
 
 export const genres: Genre[] = [
   "ALL",
