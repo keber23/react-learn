@@ -19,7 +19,7 @@ describe("Dialog", () => {
         <p>Dialog content</p>
       </Dialog>
     );
-    fireEvent.click(screen.getByText("×"));
+    fireEvent.click(screen.getByTestId("close-button"));
     expect(onClose).toHaveBeenCalled();
   });
   it("calls onClose when Escape key is pressed", () => {

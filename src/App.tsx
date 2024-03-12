@@ -9,41 +9,41 @@ import {
   SortOption,
   Movie,
   Dialog,
+  MovieForm,
 } from "./components";
 import { useState } from "react";
 import { genres } from "./components/GenreSelect/Component/GenreSelect";
-import MovieForm from "./components/MovieForm/Component/MovieForm";
 import styles from "./App.module.css";
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre>(genres[0]);
   const [selectedSort, setSelectedSort] = useState<SortOption>();
-  const [isOpenAdd, setIsOpenAdd] = useState(false);
-  const [isOpenEdit, setIsOpenEdit] = useState(false);
-  const [isOpenDeleteConfirmation, setIsOpenEditDeleteConfirmation] =
-    useState(false);
 
-  const openDialogAdd = () => {
-    setIsOpenAdd(true);
+  const [showAddMovie, setShowAddMovie] = useState(false);
+  const [showEditMovie, setShowEditMovie] = useState(false);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
+  const showDialogAddMovie = () => {
+    setShowAddMovie(true);
   };
 
-  const closeDialogAdd = () => {
-    setIsOpenAdd(false);
+  const hideDialogAddMovie = () => {
+    setShowAddMovie(false);
   };
 
-  const openDialogEdit = () => {
-    setIsOpenEdit(true);
+  const showDialogEditMovie = () => {
+    setShowEditMovie(true);
   };
 
-  const closeDialogEdit = () => {
-    setIsOpenEdit(false);
+  const hideDialogEditMovie = () => {
+    setShowEditMovie(false);
   };
 
-  const openDialogDeleteConfirmation = () => {
-    setIsOpenEditDeleteConfirmation(true);
+  const showDialogDeleteConfirmation = () => {
+    setShowDeleteConfirmation(true);
   };
 
-  const closeDialogDeleteConfirmation = () => {
-    setIsOpenEditDeleteConfirmation(false);
+  const hideDialogDeleteConfirmation = () => {
+    setShowDeleteConfirmation(false);
   };
 
   function onSearch(searchText: string) {
@@ -62,17 +62,14 @@ function App() {
 
   const handleMovieClick = (movie: Movie) => {
     console.log("Clicked movie:", movie);
-    // Perform any action when a movie is clicked, such as showing details
   };
 
   const handleEditMovie = (movie: Movie) => {
     console.log("Edit movie:", movie);
-    // Perform edit operation on the movie
   };
 
   const handleDeleteMovie = (movie: Movie) => {
     console.log("Delete movie:", movie);
-    // Perform delete operation on the movie
   };
 
   // Sample movie data
@@ -87,11 +84,11 @@ function App() {
   };
 
   function onSubmitMovie(movie: Movie): void {
-    throw new Error("Function not implemented.");
+    console.log("Submitted movie:", movie);
   }
 
   function handleDeleteMovieConfirmation(movie: Movie): void {
-    throw new Error("Function not implemented.");
+    console.log("Deleted movie:", movie);
   }
 
   return (
@@ -123,24 +120,24 @@ function App() {
         <MovieDetails movie={movie} />
       </div>
 
-      <button onClick={openDialogAdd}>Add Movie</button>
-      {isOpenAdd && (
-        <Dialog title="ADD MOVIE" onClose={closeDialogAdd}>
+      <button onClick={showDialogAddMovie}>Add Movie</button>
+      {showAddMovie && (
+        <Dialog title="ADD MOVIE" onClose={hideDialogAddMovie}>
           <MovieForm onSubmit={onSubmitMovie} />
         </Dialog>
       )}
 
-      <button onClick={openDialogEdit}>Edit Movie</button>
-      {isOpenEdit && (
-        <Dialog title="EDIT MOVIE" onClose={closeDialogEdit}>
+      <button onClick={showDialogEditMovie}>Edit Movie</button>
+      {showEditMovie && (
+        <Dialog title="EDIT MOVIE" onClose={hideDialogEditMovie}>
           <MovieForm initialMovie={movie} onSubmit={onSubmitMovie} />
         </Dialog>
       )}
 
-      <button onClick={openDialogDeleteConfirmation}>Delete Movie</button>
-      {isOpenDeleteConfirmation && (
-        <Dialog title="DELETE MOVIE" onClose={closeDialogDeleteConfirmation}>
-          <p>Are you sure you want to delete this movie?</p>
+      <button onClick={showDialogDeleteConfirmation}>Delete Movie</button>
+      {showDeleteConfirmation && (
+        <Dialog title="DELETE MOVIE" onClose={hideDialogDeleteConfirmation}>
+          <p>Are you sure you want to delete "{movie.title}"?</p>
           <button
             className={styles.btnConfirm}
             onClick={() => handleDeleteMovieConfirmation(movie)}

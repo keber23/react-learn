@@ -43,7 +43,11 @@ const Dialog: React.FC<DialogProps> = ({ title, onClose, children }) => {
         <div className={styles.dialog} ref={dialogRef}>
           <div className={styles.header}>
             <div className={styles.title}>{title}</div>
-            <button className={styles.closeButton} onClick={handleClose}>
+            <button
+              data-testId="close-button"
+              className={styles.closeButton}
+              onClick={handleClose}
+            >
               &#215;
             </button>
           </div>

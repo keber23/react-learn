@@ -25,11 +25,6 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
     onSubmit(movie);
   };
 
-  const handleReset = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    event.currentTarget.reset();
-  };
-
   return (
     <>
       <div className={styles.container}>
@@ -115,14 +110,14 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
           <div className={styles.row}>
             <div className={styles["col-50"]}></div>
             <div className={styles["col-25"]}>
-              <input type="reset" value="RESET" className={styles.btnReset} />
+              <button type="reset" className={styles.btnReset}>
+                RESET
+              </button>
             </div>
             <div className={styles["col-25"]}>
-              <input
-                type="submit"
-                value="SUBMIT"
-                className={styles.btnSubmit}
-              />
+              <button type="submit" className={styles.btnSubmit}>
+                Submit
+              </button>
             </div>
           </div>
         </form>
