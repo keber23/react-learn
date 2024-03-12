@@ -8,13 +8,43 @@ import {
   MovieDetails,
   SortOption,
   Movie,
+  Dialog,
 } from "./components";
 import { useState } from "react";
 import { genres } from "./components/GenreSelect/Component/GenreSelect";
-
+import MovieForm from "./components/MovieForm/Component/MovieForm";
+import styles from "./App.module.css";
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre>(genres[0]);
   const [selectedSort, setSelectedSort] = useState<SortOption>();
+  const [isOpenAdd, setIsOpenAdd] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [isOpenDeleteConfirmation, setIsOpenEditDeleteConfirmation] =
+    useState(false);
+
+  const openDialogAdd = () => {
+    setIsOpenAdd(true);
+  };
+
+  const closeDialogAdd = () => {
+    setIsOpenAdd(false);
+  };
+
+  const openDialogEdit = () => {
+    setIsOpenEdit(true);
+  };
+
+  const closeDialogEdit = () => {
+    setIsOpenEdit(false);
+  };
+
+  const openDialogDeleteConfirmation = () => {
+    setIsOpenEditDeleteConfirmation(true);
+  };
+
+  const closeDialogDeleteConfirmation = () => {
+    setIsOpenEditDeleteConfirmation(false);
+  };
 
   function onSearch(searchText: string) {
     console.log(searchText);
@@ -53,8 +83,16 @@ function App() {
     voteAverage: 8.5,
     runtime: 150,
     overview: "This is an example movie description.",
-    genres: ["Action", "Adventure"],
+    genres: ["Comedy", "Crime"],
   };
+
+  function onSubmitMovie(movie: Movie): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function handleDeleteMovieConfirmation(movie: Movie): void {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <>
@@ -84,6 +122,33 @@ function App() {
       <div className="movie-details-container">
         <MovieDetails movie={movie} />
       </div>
+
+      <button onClick={openDialogAdd}>Add Movie</button>
+      {isOpenAdd && (
+        <Dialog title="ADD MOVIE" onClose={closeDialogAdd}>
+          <MovieForm onSubmit={onSubmitMovie} />
+        </Dialog>
+      )}
+
+      <button onClick={openDialogEdit}>Edit Movie</button>
+      {isOpenEdit && (
+        <Dialog title="EDIT MOVIE" onClose={closeDialogEdit}>
+          <MovieForm initialMovie={movie} onSubmit={onSubmitMovie} />
+        </Dialog>
+      )}
+
+      <button onClick={openDialogDeleteConfirmation}>Delete Movie</button>
+      {isOpenDeleteConfirmation && (
+        <Dialog title="DELETE MOVIE" onClose={closeDialogDeleteConfirmation}>
+          <p>Are you sure you want to delete this movie?</p>
+          <button
+            className={styles.btnConfirm}
+            onClick={() => handleDeleteMovieConfirmation(movie)}
+          >
+            Confirm
+          </button>
+        </Dialog>
+      )}
     </>
   );
 }
