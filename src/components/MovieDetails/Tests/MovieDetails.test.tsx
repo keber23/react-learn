@@ -12,7 +12,7 @@ describe("MovieDetails", () => {
     voteAverage: 8.5,
     runtime: 150,
     overview: "This is an example movie description.",
-    genres: ["Action", "Adventure"],
+    genres: ["Comedy", "Crime"],
   };
 
   test("renders movie details correctly", () => {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { MovieDetails } from "../components";
+import { MovieForm } from "../components";
 import { Movie } from "../components/Types/movie";
 
 const mockMovie: Movie = {
@@ -14,38 +14,23 @@ const mockMovie: Movie = {
 };
 
 const meta = {
-  title: "EPAM React/MovieDetails",
-  component: MovieDetails,
+  title: "EPAM React/MovieForm",
+  component: MovieForm,
   parameters: {
     layout: "centered",
   },
-
   argTypes: {},
-} satisfies Meta<typeof MovieDetails>;
+} satisfies Meta<typeof MovieForm>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    movie: mockMovie,
-  },
+export const AddMovie: Story = {
+  args: {},
 };
 
-export const NoImage: Story = {
+export const EditMovie: Story = {
   args: {
-    movie: {
-      ...mockMovie,
-      posterPath: "",
-    },
-  },
-};
-
-export const NoGenres: Story = {
-  args: {
-    movie: {
-      ...mockMovie,
-      genres: [],
-    },
+    initialMovie: mockMovie,
   },
 };
