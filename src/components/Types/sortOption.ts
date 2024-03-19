@@ -1,1 +1,1 @@
-export type SortOption = "releaseDate" | "title";
+export type SortOption = "release_date" | "title";

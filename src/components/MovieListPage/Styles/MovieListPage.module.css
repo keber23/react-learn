@@ -1,0 +1,49 @@
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.movieDetailsContainer {
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 80px;
+  height: 20px;
+  background: red;
+  color: white;
+  border-radius: 10px;
+  border: none;
+}
+
+.movieSearchContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 510px;
+  background-image: linear-gradient(to right, rgba(5, 5, 5, 0.9) 0 100%),
+    url(../../../assets/Images/backgroundMovies.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.movieGenreSortContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.movieListContainer {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 20px;
+  justify-content: center;
+}

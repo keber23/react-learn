@@ -27,7 +27,7 @@ export default function SortControl({
         onChange={handleSelectionChange}
         className={styles.select}
       >
-        <option value="releaseDate">Release Date</option>
+        <option value="release_date">Release Date</option>
         <option value="title">Title</option>
       </select>
     </div>

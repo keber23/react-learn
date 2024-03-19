@@ -9,7 +9,7 @@ describe("SortControl", () => {
     onSelectionChange = jest.fn();
   });
 
-  test.each<SortOption>(["releaseDate", "title"])(
+  test.each<SortOption>(["release_date", "title"])(
     "renders with initial selection '%s' correctly",
     (initialSelection) => {
       render(
@@ -28,7 +28,7 @@ describe("SortControl", () => {
   test("calls onSelectionChange with new value when select value changes", () => {
     render(
       <SortControl
-        initialSelection="releaseDate"
+        initialSelection="release_date"
         onSelectionChange={onSelectionChange}
       />
     );

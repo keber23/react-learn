@@ -21,7 +21,7 @@ export const EmptySelection: Story = {
 
 export const ReleaseDateSelection: Story = {
   args: {
-    initialSelection: "releaseDate",
+    initialSelection: "release_date",
   },
 };
 
