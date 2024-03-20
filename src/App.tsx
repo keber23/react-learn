@@ -1,4 +1,4 @@
-import { MovieListPage } from "./components";
+import { MovieListPage } from "./pages";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useQuery } from "react-query";
 
 import {
   SearchForm,
@@ -10,18 +9,11 @@ import {
   Genre,
   Movie,
   SortOption,
-} from "../../";
+} from "../../../components";
 
-import { genres } from "../../GenreSelect/Component/GenreSelect";
-import axios from "axios";
+import { genres } from "../../../components/GenreSelect/Component/GenreSelect";
 import styles from "../Styles/MovieListPage.module.css";
-
-type ApiData = {
-  totalAmount: number;
-  data: Movie[];
-  offset: number;
-  limit: number;
-};
+import useMovieQuery from "../../../hooks/useMovieQuery";
 
 const MovieListPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -29,26 +21,11 @@ const MovieListPage: React.FC = () => {
   const [selectedSort, setSelectedSort] = useState<SortOption>("release_date");
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["movies", searchQuery, selectedGenre, selectedSort],
-    queryFn: ({ signal }) => {
-      let apiUrl = "http://localhost:4000/movies";
-
-      apiUrl += `?sortBy=${selectedSort}&sortOrder=asc`;
-
-      if (searchQuery) {
-        apiUrl += `&searchBy=title&search=${searchQuery}`;
-      }
-
-      if (selectedGenre && selectedGenre !== "ALL") {
-        apiUrl += `&filter=${selectedGenre}`;
-      }
-
-      return axios.get<ApiData>(apiUrl, { signal }).then((res) => {
-        return res.data;
-      });
-    },
-  });
+  const { isLoading, data } = useMovieQuery(
+    searchQuery,
+    selectedGenre,
+    selectedSort
+  );
 
   const onSearch = (searchText: string) => {
     setSearchQuery(searchText);
@@ -66,12 +43,21 @@ const MovieListPage: React.FC = () => {
     setSelectedMovie(movie);
   }
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{JSON.stringify(error)}</div>;
+  const renderMovieTiles = (movies: Movie[] | undefined) => {
+    return movies?.map((movie) => (
+      <MovieTile
+        key={movie.id}
+        movie={movie}
+        onClick={() => onMovieClick(movie)}
+        onEdit={() => onMovieClick(movie)}
+        onDelete={() => onMovieClick(movie)}
+      />
+    ));
+  };
 
   return (
     <div className={styles.container}>
-      {selectedMovie && (
+      {selectedMovie ? (
         <div className={styles.movieDetailsContainer}>
           <button
             className={styles.closeButton}
@@ -81,13 +67,13 @@ const MovieListPage: React.FC = () => {
           </button>
           <MovieDetails movie={selectedMovie} />
         </div>
-      )}
-      {!selectedMovie && (
+      ) : (
         <div className={styles.movieSearchContainer}>
           <h1>FIND YOUR MOVIE</h1>
           <SearchForm initialSearchText={searchQuery} onSearch={onSearch} />
         </div>
       )}
+
       <div className={styles.movieGenreSortContainer}>
         <GenreSelect
           genres={genres}
@@ -100,15 +86,7 @@ const MovieListPage: React.FC = () => {
         />
       </div>
       <div className={styles.movieListContainer}>
-        {data?.data?.map((movie) => (
-          <MovieTile
-            key={movie.id}
-            movie={movie}
-            onClick={() => onMovieClick(movie)}
-            onEdit={() => onMovieClick(movie)}
-            onDelete={() => onMovieClick(movie)}
-          />
-        ))}
+        {isLoading ? <div>Loading...</div> : renderMovieTiles(data)}
       </div>
     </div>
   );
