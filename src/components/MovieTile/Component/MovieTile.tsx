@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Movie } from "../../Types/movie";
+import { Movie } from "../../../types/movie";
 import styles from "../Styles/MovieTile.module.css";
 import { extractYear } from "../../../utils/extractYear";
 import defaultPosterUrl from "../../../assets/Images/200.png";

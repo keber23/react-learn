@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import MovieForm from "../Component/MovieForm";
-import { Movie } from "../../Types/movie";
+import { Movie } from "../../../types/movie";
 
 describe("MovieForm", () => {
   const onSubmitMock = jest.fn();

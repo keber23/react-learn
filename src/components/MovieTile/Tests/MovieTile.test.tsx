@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import MovieTile from "../Component/MovieTile";
-import { Movie } from "../../Types/movie";
+import { Movie } from "../../../types/movie";
 import { extractYear } from "../../../utils/extractYear";
 
 describe("MovieTile", () => {

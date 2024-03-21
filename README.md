@@ -8,11 +8,42 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Concurrently runs both the API server and React app using `start:api` and `start:page` scripts.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+### `npm run start:api`
+
+Starts the Movies API server.
+
+### `npm run start:page`
+
+Starts the React app.
+
+### `npm run cy:open`
+
+Runs Cypress in interactive mode, opening the Cypress Test Runner.
+
+### `npm run cy:run`
+
+Runs Cypress tests in headless mode.
+
+### `npm run cypress:open`
+
+Starts the development server and then opens Cypress in interactive mode.
+
+### `npm run cypress:run`
+
+Starts the development server and runs Cypress tests in headless mode.
+
+### `npm run storybook`
+
+Starts Storybook for developing UI components.
+
+### `npm run build-storybook`
+
+Builds Storybook as a static web application.
 
 ### `npm test`
 

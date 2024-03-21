@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import MovieDetails from "../Component/MovieDetails";
 import { formatDuration } from "../../../utils/formatDuration";
-import { Movie } from "../../Types/movie";
+import { Movie } from "../../../types/movie";
 import { extractYear } from "../../../utils/extractYear";
 
 describe("MovieDetails", () => {

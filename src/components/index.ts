@@ -1,8 +1,5 @@
 export { default as Counter } from "./Counter/Component/Counter";
 export { default as GenreSelect } from "./GenreSelect/Component/GenreSelect";
-export type { Genre } from "./Types/genre";
-export type { Movie } from "./Types/movie";
-export type { SortOption } from "./Types/sortOption";
 export { default as SearchForm } from "./SearchForm/Component/SearchForm";
 export { default as MovieDetails } from "./MovieDetails/Component/MovieDetails";
 export { default as MovieTile } from "./MovieTile/Component/MovieTile";

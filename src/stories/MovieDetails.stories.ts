@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { MovieDetails } from "../components";
-import { Movie } from "../components/Types/movie";
+import { Movie } from "../types/movie";
 
 const mockMovie: Movie = {
   poster_path: "https://picsum.photos/id/1/200/200",

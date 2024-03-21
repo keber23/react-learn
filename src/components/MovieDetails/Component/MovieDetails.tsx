@@ -1,6 +1,6 @@
 import { extractYear } from "../../../utils/extractYear";
 import { formatDuration } from "../../../utils/formatDuration";
-import { Movie } from "../../Types/movie";
+import { Movie } from "../../../types/movie";
 import styles from "../Styles/MovieDetails.module.css";
 import defaultPosterUrl from "../../../assets/Images/200.png";
 interface Props {

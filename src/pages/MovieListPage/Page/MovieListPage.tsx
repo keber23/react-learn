@@ -6,14 +6,12 @@ import {
   GenreSelect,
   MovieTile,
   MovieDetails,
-  Genre,
-  Movie,
-  SortOption,
 } from "../../../components";
 
 import { genres } from "../../../components/GenreSelect/Component/GenreSelect";
 import styles from "../Styles/MovieListPage.module.css";
 import useMovieQuery from "../../../hooks/useMovieQuery";
+import { Genre, SortOption, Movie, SearchParams } from "../../../types";
 
 const MovieListPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -21,11 +19,11 @@ const MovieListPage: React.FC = () => {
   const [selectedSort, setSelectedSort] = useState<SortOption>("release_date");
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
-  const { isLoading, data } = useMovieQuery(
+  const { isLoading, data } = useMovieQuery({
     searchQuery,
     selectedGenre,
-    selectedSort
-  );
+    selectedSort,
+  } as SearchParams);
 
   const onSearch = (searchText: string) => {
     setSearchQuery(searchText);
@@ -49,8 +47,8 @@ const MovieListPage: React.FC = () => {
         key={movie.id}
         movie={movie}
         onClick={() => onMovieClick(movie)}
-        onEdit={() => onMovieClick(movie)}
-        onDelete={() => onMovieClick(movie)}
+        onEdit={() => {}}
+        onDelete={() => {}}
       />
     ));
   };
@@ -58,7 +56,7 @@ const MovieListPage: React.FC = () => {
   return (
     <div className={styles.container}>
       {selectedMovie ? (
-        <div className={styles.movieDetailsContainer}>
+        <section className={styles.movieDetailsContainer}>
           <button
             className={styles.closeButton}
             onClick={() => onMovieClick(null)}
@@ -66,12 +64,12 @@ const MovieListPage: React.FC = () => {
             Close
           </button>
           <MovieDetails movie={selectedMovie} />
-        </div>
+        </section>
       ) : (
-        <div className={styles.movieSearchContainer}>
+        <section className={styles.movieSearchContainer}>
           <h1>FIND YOUR MOVIE</h1>
           <SearchForm initialSearchText={searchQuery} onSearch={onSearch} />
-        </div>
+        </section>
       )}
 
       <div className={styles.movieGenreSortContainer}>

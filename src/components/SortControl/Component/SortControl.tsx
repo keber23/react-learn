@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 import styles from "../Styles/SortControl.module.css";
-import { SortOption } from "../../Types/sortOption";
+import { SortOption } from "../../../types/sortOption";
 
 interface Props {
   initialSelection?: SortOption;

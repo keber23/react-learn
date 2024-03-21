@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../Styles/MovieForm.module.css";
-import { Movie } from "../../Types/movie";
+import { Movie } from "../../../types/movie";
 import { genres } from "../../GenreSelect/Component/GenreSelect";
 
 interface MovieFormProps {

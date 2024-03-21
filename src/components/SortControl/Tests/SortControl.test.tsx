@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import SortControl from "../Component/SortControl";
-import { SortOption } from "../../Types/sortOption";
+import { SortOption } from "../../../types/sortOption";
 
 describe("SortControl", () => {
   let onSelectionChange: jest.Mock;
