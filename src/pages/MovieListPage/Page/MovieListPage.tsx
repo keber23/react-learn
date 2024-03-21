@@ -6,6 +6,7 @@ import {
   GenreSelect,
   MovieTile,
   MovieDetails,
+  Loader,
 } from "../../../components";
 
 import { genres } from "../../../components/GenreSelect/Component/GenreSelect";
@@ -84,7 +85,7 @@ const MovieListPage: React.FC = () => {
         />
       </div>
       <div className={styles.movieListContainer}>
-        {isLoading ? <div>Loading...</div> : renderMovieTiles(data)}
+        {isLoading ? <Loader  /> : renderMovieTiles(data)}
       </div>
     </div>
   );
