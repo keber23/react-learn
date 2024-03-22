@@ -2,6 +2,13 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Node version v20.9.0
+
+In order to install API please run 2 commands in bash:
+
+1. chmod +x setup_api.sh
+2. ./setup_api.sh
+
 ## Available Scripts
 
 In the project directory, you can run:
