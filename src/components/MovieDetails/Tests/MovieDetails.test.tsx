@@ -1,15 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import MovieDetails from "../Component/MovieDetails";
 import { formatDuration } from "../../../utils/formatDuration";
-import { Movie } from "../../Types/movie";
+import { Movie } from "../../../types/movie";
 import { extractYear } from "../../../utils/extractYear";
 
 describe("MovieDetails", () => {
   let movie: Movie = {
-    posterPath: "https://example.com/image.jpg",
+    poster_path: "https://example.com/image.jpg",
     title: "Example Movie",
-    releaseDate: "2022-05-12",
-    voteAverage: 8.5,
+    release_date: "2022-05-12",
+    vote_average: 8.5,
     runtime: 150,
     overview: "This is an example movie description.",
     genres: ["Comedy", "Crime"],
@@ -22,9 +22,9 @@ describe("MovieDetails", () => {
     expect(screen.getByAltText(movie.title!)).toBeInTheDocument();
     expect(screen.getByText(movie.title!)).toBeInTheDocument();
     expect(
-      screen.getByText(extractYear(movie.releaseDate))
+      screen.getByText(extractYear(movie.release_date))
     ).toBeInTheDocument();
-    expect(screen.getByText(movie.voteAverage!)).toBeInTheDocument();
+    expect(screen.getByText(movie.vote_average!)).toBeInTheDocument();
     expect(screen.getByText(formatDuration(movie.runtime))).toBeInTheDocument();
     expect(screen.getByText(movie.overview!)).toBeInTheDocument();
     expect(screen.getByText(`${movie.genres?.join(", ")}`)).toBeInTheDocument();

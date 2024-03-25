@@ -1,4 +1,4 @@
-import { Genre } from "../../Types/genre";
+import { Genre } from "../../../types";
 import styles from "../Styles/GenreSelect.module.css";
 
 export const genres: Genre[] = [

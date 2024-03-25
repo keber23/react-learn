@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../Styles/MovieForm.module.css";
-import { Movie } from "../../Types/movie";
+import { Movie } from "../../../types/movie";
 import { genres } from "../../GenreSelect/Component/GenreSelect";
 
 interface MovieFormProps {
@@ -14,10 +14,10 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
     const formData = new FormData(event.currentTarget);
     const movie: Movie = {
       title: formData.get("title") as string,
-      posterPath: formData.get("movieUrl") as string,
+      poster_path: formData.get("movieUrl") as string,
       genres: Array.from(formData.getAll("genre") as Iterable<string>),
-      releaseDate: formData.get("releaseDate") as string,
-      voteAverage: parseFloat(formData.get("rating") as string),
+      release_date: formData.get("releaseDate") as string,
+      vote_average: parseFloat(formData.get("rating") as string),
       runtime: parseInt(formData.get("runtime") as string),
       overview: formData.get("overview") as string,
     };
@@ -45,7 +45,7 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
                 id="movieUrl"
                 type="text"
                 name="movieUrl"
-                defaultValue={initialMovie?.posterPath}
+                defaultValue={initialMovie?.poster_path}
                 placeholder="https://"
               />
 
@@ -74,7 +74,7 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
                 id="releaseDate"
                 type="date"
                 name="releaseDate"
-                defaultValue={initialMovie?.releaseDate}
+                defaultValue={initialMovie?.release_date}
                 placeholder="Select Date"
               />
 
@@ -83,7 +83,7 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
                 id="rating"
                 type="number"
                 name="rating"
-                defaultValue={initialMovie?.voteAverage?.toString()}
+                defaultValue={initialMovie?.vote_average?.toString()}
               />
 
               <label htmlFor="runtime">RUNTIME</label>

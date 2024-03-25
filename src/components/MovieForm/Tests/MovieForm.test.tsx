@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import MovieForm from "../Component/MovieForm";
-import { Movie } from "../../Types/movie";
+import { Movie } from "../../../types/movie";
 
 describe("MovieForm", () => {
   const onSubmitMock = jest.fn();
@@ -15,10 +15,10 @@ describe("MovieForm", () => {
   test("renders form with initial movie data", () => {
     const initialMovie: Movie = {
       title: "Test Movie",
-      posterPath: "https://example.com/test-movie",
+      poster_path: "https://example.com/test-movie",
       genres: ["Comedy", "Horror"],
-      releaseDate: "2022-03-15",
-      voteAverage: 7,
+      release_date: "2022-03-15",
+      vote_average: 7,
       runtime: 120,
       overview: "Test movie overview.",
     };
@@ -60,10 +60,10 @@ describe("MovieForm", () => {
 
     expect(onSubmitMock).toHaveBeenCalledWith({
       title: "Test Movie",
-      posterPath: "https://example.com/test-movie",
+      poster_path: "https://example.com/test-movie",
       genres: ["comedy", "horror"],
-      releaseDate: "2022-03-15",
-      voteAverage: 7,
+      release_date: "2022-03-15",
+      vote_average: 7,
       runtime: 120,
       overview: "Test movie overview",
     });

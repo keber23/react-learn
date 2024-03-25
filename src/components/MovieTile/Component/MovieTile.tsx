@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Movie } from "../../Types/movie";
+import { Movie } from "../../../types/movie";
 import styles from "../Styles/MovieTile.module.css";
 import { extractYear } from "../../../utils/extractYear";
 import defaultPosterUrl from "../../../assets/Images/200.png";
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function MovieTile({ movie, onClick, onEdit, onDelete }: Props) {
-  const { posterPath, title, releaseDate, genres } = movie;
+  const { poster_path, title, release_date, genres } = movie;
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 
   const handleContextMenuButtonClick = (
@@ -42,14 +42,18 @@ export default function MovieTile({ movie, onClick, onEdit, onDelete }: Props) {
     <div className={styles.movieTile} onClick={handleClick}>
       <div className={styles.poster}>
         <img
-          src={posterPath || defaultPosterUrl}
+          src={poster_path || defaultPosterUrl}
           alt={title}
           style={{ width: "322px", height: "455px" }}
+          onError={(e) => {
+            e.currentTarget.src = defaultPosterUrl;
+            e.currentTarget.onerror = null;
+          }}
         />
       </div>
       <div className={styles.info}>
         <h2>{title}</h2>
-        <span className={styles.releaseYear}>{extractYear(releaseDate)}</span>
+        <span className={styles.releaseYear}>{extractYear(release_date)}</span>
       </div>
       <p className={styles.genres}>{genres?.join(", ")}</p>
       <button

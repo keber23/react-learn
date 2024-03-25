@@ -1,15 +1,14 @@
 .sortControl {
-  margin-bottom: 20px;
   background-color: black;
 }
 
 .label {
-  margin-right: 10px;
-  color: grey; /* Change text color to grey */
+  color: grey;
+  display: inline;
 }
 
 .select {
-  width: 120px;
+  width: 130px;
   padding: 5px;
   background-color: black;
   color: white;

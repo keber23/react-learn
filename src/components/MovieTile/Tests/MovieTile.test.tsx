@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import MovieTile from "../Component/MovieTile";
-import { Movie } from "../../Types/movie";
+import { Movie } from "../../../types/movie";
 import { extractYear } from "../../../utils/extractYear";
 
 describe("MovieTile", () => {
@@ -15,9 +15,9 @@ describe("MovieTile", () => {
     onDelete = jest.fn();
 
     movie = {
-      posterPath: "https://example.com/image.jpg",
+      poster_path: "https://example.com/image.jpg",
       title: "Example Movie",
-      releaseDate: "2022-09-30",
+      release_date: "2022-09-30",
       genres: ["Action", "Adventure"],
     };
   });
@@ -36,7 +36,7 @@ describe("MovieTile", () => {
     expect(screen.getByAltText(movie.title!)).toBeInTheDocument();
     expect(screen.getByText(movie.title!)).toBeInTheDocument();
     expect(
-      screen.getByText(extractYear(movie.releaseDate))
+      screen.getByText(extractYear(movie.release_date))
     ).toBeInTheDocument();
     expect(screen.getByText(`${movie.genres?.join(", ")}`)).toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();

@@ -1,6 +1,6 @@
 import { extractYear } from "../../../utils/extractYear";
 import { formatDuration } from "../../../utils/formatDuration";
-import { Movie } from "../../Types/movie";
+import { Movie } from "../../../types/movie";
 import styles from "../Styles/MovieDetails.module.css";
 import defaultPosterUrl from "../../../assets/Images/200.png";
 interface Props {
@@ -9,10 +9,10 @@ interface Props {
 
 export default function MovieDetails({ movie }: Props) {
   const {
-    posterPath,
+    poster_path,
     title,
-    releaseDate,
-    voteAverage,
+    release_date,
+    vote_average,
     runtime,
     overview,
     genres,
@@ -22,18 +22,22 @@ export default function MovieDetails({ movie }: Props) {
     <div className={styles.movieDetails}>
       <div className={styles.poster}>
         <img
-          src={posterPath || defaultPosterUrl}
+          src={poster_path || defaultPosterUrl}
           alt={title}
           style={{ width: "323", height: "486px" }}
+          onError={(e) => {
+            e.currentTarget.src = defaultPosterUrl;
+            e.currentTarget.onerror = null;
+          }}
         />
       </div>
       <div className={styles.info}>
         <h2>{title}</h2>
-        <span className={styles.rating}>{voteAverage}</span>
+        <span className={styles.rating}>{vote_average}</span>
         <p className={styles.genres}>{genres?.join(", ")}</p>
         <p>
           <span className={styles["release-date"]}>
-            {extractYear(releaseDate)}
+            {extractYear(release_date)}
           </span>
           <span className={styles.duration}>{formatDuration(runtime)}</span>
         </p>
