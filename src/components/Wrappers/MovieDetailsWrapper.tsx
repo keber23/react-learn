@@ -1,4 +1,4 @@
-import { useLoaderData, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import MovieDetails from "../MovieDetails/Component/MovieDetails";
 import { Movie } from "../../types";
 import useMovieQuery from "../../hooks/useMovieQuery";
@@ -10,15 +10,14 @@ import styles from "../../pages/MovieListPage/Styles/MovieListPage.module.css";
 
 export default function MovieDetailsWrapper() {
   //const movieId = useLoaderData() as string;
+  const [searchParams] = useSearchParams();
 
   let { movieId } = useParams();
 
   const { data } = useMovieQuery(movieId as string);
 
   const navigate = useNavigate();
-  const location = useLocation(); // React Hook
-  
-  
+
   const movie = data as Movie | undefined;
 
   if (movie === undefined) {
@@ -26,9 +25,7 @@ export default function MovieDetailsWrapper() {
   }
 
   function onCloseClick(): void {
-    //navigate(`/${movie?.id}`);
-    navigate(location.pathname);
-    //console.log(location.pathname); // returns relative path, without domain name
+    navigate({ pathname: `/`, search: searchParams.toString() });
   }
 
   return (
