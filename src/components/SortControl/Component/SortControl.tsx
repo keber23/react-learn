@@ -23,6 +23,7 @@ export default function SortControl({
       </label>
       <select
         id="sort"
+        name="sort"
         defaultValue={initialSelection || "releaseDate"}
         onChange={handleSelectionChange}
         className={styles.select}

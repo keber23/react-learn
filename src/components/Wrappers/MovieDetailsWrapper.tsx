@@ -29,7 +29,10 @@ export default function MovieDetailsWrapper() {
   }
 
   return (
-    <section className={styles.movieDetailsContainer}>
+    <section
+      className={styles.movieDetailsContainer}
+      data-cy="movieDetailsWrapper"
+    >
       <button className={styles.closeButton} onClick={() => onCloseClick()}>
         Close
       </button>

@@ -39,7 +39,7 @@ export default function MovieTile({ movie, onClick, onEdit, onDelete }: Props) {
   };
 
   return (
-    <div className={styles.movieTile} onClick={handleClick}>
+    <div className={styles.movieTile} onClick={handleClick} data-cy="movieTile">
       <div className={styles.poster}>
         <img
           src={poster_path || defaultPosterUrl}
