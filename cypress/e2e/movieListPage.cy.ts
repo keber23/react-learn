@@ -1,9 +1,9 @@
 describe("MovieListPage", () => {
-  // beforeEach(() => {
-  //   cy.visit("http://localhost:3000/");
-  // });
+  beforeEach(() => {
+    cy.visit("http://localhost:3000/");
+  });
 
-  it("Navigating to the page displays a search form and a list of movies.", () => {
+  it('Navigating to "/" the page displays a search form and a list of movies.', () => {
     cy.visit("/");
     cy.get('[data-cy="movieTile"]').should("have.length.greaterThan", 0);
   });
@@ -14,18 +14,23 @@ describe("MovieListPage", () => {
     cy.get('button[type="submit"]').click();
     cy.url().should("include", "?query=Star+Wars");
     cy.get('[data-cy="movieTile"]').should("have.length.greaterThan", 0);
+    cy.get('[data-cy="movieTitle"]').should("have.length", 9);
+    cy.get('[data-cy="movieTitle"]').contains("Star Wars");
   });
 
   it("Navigating to /?query=abc displays a search form with entered text abc and a movie list relevant to the search query.", () => {
     cy.visit("/?query=abc");
     cy.get('input[type="text"]').should("have.value", "abc");
     cy.get('[data-cy="movieTile"]').should("not.exist");
+    cy.get('[data-cy="movieTitle"]').should("not.exist");
   });
 
   it("Navigating to /?query=day displays a search form with entered text abc and a movie list relevant to the search query.", () => {
     cy.visit("/?query=day");
     cy.get('input[type="text"]').should("have.value", "day");
     cy.get('[data-cy="movieTile"]').should("have.length.greaterThan", 0);
+    cy.get('[data-cy="movieTitle"]').should("have.length", 10);
+    cy.get('[data-cy="movieTitle"]').contains("day");
   });
 
   it("Selecting a genre updates the URL with genre search parameter containing the selected genre. The movie list is refreshed to display movies of the selected genre.", () => {
@@ -33,6 +38,7 @@ describe("MovieListPage", () => {
     cy.contains("button", "COMEDY").click();
     cy.url().should("include", "genre=COMEDY");
     cy.get('[data-cy="movieTile"]').should("have.length.greaterThan", 0);
+    cy.get('[data-cy="movieGenres"]').contains("Comedy");
   });
 
   it("Navigating to /?genre=comedy displays Comedy genre as selected and movies of comedy genre.", () => {
@@ -41,6 +47,7 @@ describe("MovieListPage", () => {
       .invoke("attr", "class")
       .should("match", /GenreSelect_selected__/);
     cy.get('[data-cy="movieTile"]').should("have.length.greaterThan", 0);
+    cy.get('[data-cy="movieGenres"]').contains("Comedy");
   });
 
   it('Selecting sorting by title updates the URL with "sortBy" search parameter with the respective value. The movie list is refreshed to display movies sorted by title.', () => {
@@ -66,6 +73,7 @@ describe("MovieListPage", () => {
     cy.get('select[name="sort"]').should("have.value", "title");
 
     cy.get('[data-cy="movieTile"]').should("not.exist");
+    cy.get('[data-cy="movieTitle"]').should("not.exist");
   });
 
   it('Navigating to "/?query=day&genre=comedy&sortBy=title" displays the search form with entered value "abc", sort select has "Title" value and the movie list displays movies relevant to these search params.', () => {
@@ -77,6 +85,7 @@ describe("MovieListPage", () => {
       .should("match", /GenreSelect_selected__/);
     cy.get('select[name="sort"]').should("have.value", "title");
     cy.get('[data-cy="movieTile"]').should("have.length.greaterThan", 0);
+    cy.get('[data-cy="movieTitle"]').contains("day");
   });
 
   it('Clicking on a movie from the list changes URL pathname to "/:movieId"', () => {

@@ -35,10 +35,19 @@ export default function MovieListPage() {
   };
 
   const handleGenreSelect = (genre: Genre) => {
-    setSearchParams((searchParams) => {
-      searchParams.set("genre", genre);
-      return searchParams;
-    });
+    let selectedGenre = genre.toString().toLowerCase();
+
+    if (selectedGenre === "all") {
+      setSearchParams((searchParams) => {
+        searchParams.delete("genre");
+        return searchParams;
+      });
+    } else {
+      setSearchParams((searchParams) => {
+        searchParams.set("genre", selectedGenre);
+        return searchParams;
+      });
+    }
   };
 
   function onMovieClick(movie: Movie | null): void {

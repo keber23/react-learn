@@ -20,7 +20,7 @@ export default function MovieDetailsWrapper() {
 
   const movie = data as Movie | undefined;
 
-  if (movie === undefined) {
+  if (!movie) {
     return <p>Movie not found</p>;
   }
 
@@ -33,7 +33,7 @@ export default function MovieDetailsWrapper() {
       className={styles.movieDetailsContainer}
       data-cy="movieDetailsWrapper"
     >
-      <button className={styles.closeButton} onClick={() => onCloseClick()}>
+      <button className={styles.closeButton} onClick={onCloseClick}>
         Close
       </button>
       <MovieDetails movie={movie} />

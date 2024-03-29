@@ -52,10 +52,12 @@ export default function MovieTile({ movie, onClick, onEdit, onDelete }: Props) {
         />
       </div>
       <div className={styles.info}>
-        <h2>{title}</h2>
+        <h2 data-cy="movieTitle">{title}</h2>
         <span className={styles.releaseYear}>{extractYear(release_date)}</span>
       </div>
-      <p className={styles.genres}>{genres?.join(", ")}</p>
+      <p className={styles.genres} data-cy="movieGenres">
+        {genres?.join(", ")}
+      </p>
       <button
         className={styles.contextMenuButton}
         onClick={handleContextMenuButtonClick}
