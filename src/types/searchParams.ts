@@ -1,5 +1,5 @@
 export type SearchParams = {
-  searchQuery: string;
-  selectedGenre: string;
-  selectedSort: string;
+  searchQuery?: string;
+  selectedGenre?: string;
+  selectedSort?: string;
 };

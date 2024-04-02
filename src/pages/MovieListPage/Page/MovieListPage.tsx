@@ -1,24 +1,25 @@
-import React, { useState } from "react";
-
 import {
-  SearchForm,
   SortControl,
   GenreSelect,
   MovieTile,
-  MovieDetails,
   Loader,
 } from "../../../components";
 
 import { genres } from "../../../components/GenreSelect/Component/GenreSelect";
 import styles from "../Styles/MovieListPage.module.css";
-import useMovieQuery from "../../../hooks/useMovieQuery";
+import useMovieQuery from "../../../hooks/useMoviesQuery";
 import { Genre, SortOption, Movie, SearchParams } from "../../../types";
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 
-const MovieListPage: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [selectedGenre, setSelectedGenre] = useState<Genre>(genres[0]);
-  const [selectedSort, setSelectedSort] = useState<SortOption>("release_date");
-  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+export default function MovieListPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryParams = Object.fromEntries(searchParams.entries());
+
+  let searchQuery = queryParams.query || "";
+  let selectedGenre = queryParams.genre || genres[0];
+  let selectedSort = queryParams.sortBy || "release_date";
+
+  const navigate = useNavigate();
 
   const { isLoading, data } = useMovieQuery({
     searchQuery,
@@ -26,20 +27,31 @@ const MovieListPage: React.FC = () => {
     selectedSort,
   } as SearchParams);
 
-  const onSearch = (searchText: string) => {
-    setSearchQuery(searchText);
-  };
-
   const handleSortChange = (newSort: SortOption) => {
-    setSelectedSort(newSort);
+    setSearchParams((searchParams) => {
+      searchParams.set("sortBy", newSort);
+      return searchParams;
+    });
   };
 
   const handleGenreSelect = (genre: Genre) => {
-    setSelectedGenre(genre);
+    let selectedGenre = genre.toString().toLowerCase();
+
+    if (selectedGenre === "all") {
+      setSearchParams((searchParams) => {
+        searchParams.delete("genre");
+        return searchParams;
+      });
+    } else {
+      setSearchParams((searchParams) => {
+        searchParams.set("genre", selectedGenre);
+        return searchParams;
+      });
+    }
   };
 
   function onMovieClick(movie: Movie | null): void {
-    setSelectedMovie(movie);
+    navigate({ pathname: `/${movie?.id}`, search: searchParams.toString() });
   }
 
   const renderMovieTiles = (movies: Movie[] | undefined) => {
@@ -56,39 +68,21 @@ const MovieListPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {selectedMovie ? (
-        <section className={styles.movieDetailsContainer}>
-          <button
-            className={styles.closeButton}
-            onClick={() => onMovieClick(null)}
-          >
-            Close
-          </button>
-          <MovieDetails movie={selectedMovie} />
-        </section>
-      ) : (
-        <section className={styles.movieSearchContainer}>
-          <h1>FIND YOUR MOVIE</h1>
-          <SearchForm initialSearchText={searchQuery} onSearch={onSearch} />
-        </section>
-      )}
-
+      <Outlet />
       <div className={styles.movieGenreSortContainer}>
         <GenreSelect
           genres={genres}
-          selectedGenre={selectedGenre}
+          selectedGenre={selectedGenre as Genre}
           onSelect={handleGenreSelect}
         />
         <SortControl
-          initialSelection={selectedSort}
+          initialSelection={selectedSort as SortOption}
           onSelectionChange={handleSortChange}
         />
       </div>
       <div className={styles.movieListContainer}>
-        {isLoading ? <Loader  /> : renderMovieTiles(data)}
+        {isLoading ? <Loader /> : renderMovieTiles(data)}
       </div>
     </div>
   );
-};
-
-export default MovieListPage;
+}

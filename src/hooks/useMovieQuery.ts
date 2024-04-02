@@ -1,17 +1,15 @@
 import { useQuery } from "react-query";
 import axios from "axios";
+import { Movie } from "../types";
 
-import { buildApiUrl } from "../helpers";
-import { SearchParams, ApiData } from "../types";
-
-const useMovieQuery = (searchParams: SearchParams) => {
-  const apiUrl = buildApiUrl(searchParams);
+const useMovieQuery = (movieId: string) => {
+  const apiUrl = `http://localhost:4000/movies/${movieId}`;
 
   const { isLoading, data, error } = useQuery({
-    queryKey: ["movies", apiUrl],
+    queryKey: ["movie", apiUrl],
     queryFn: ({ signal }) => {
-      return axios.get<ApiData>(apiUrl, { signal }).then((res) => {
-        return res.data.data;
+      return axios.get<Movie>(apiUrl, { signal }).then((res) => {
+        return res.data;
       });
     },
   });
