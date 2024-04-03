@@ -1,4 +1,9 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  Outlet,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import MovieDetails from "../MovieDetails/Component/MovieDetails";
 import { Movie } from "../../types";
 import useMovieQuery from "../../hooks/useMovieQuery";
@@ -37,6 +42,7 @@ export default function MovieDetailsWrapper() {
         Close
       </button>
       <MovieDetails movie={movie} />
+      <Outlet />
     </section>
   );
 }

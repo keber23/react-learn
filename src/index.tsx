@@ -3,10 +3,13 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { RouterProvider } from "react-router-dom";
-import { router } from "./router/Routes";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { MovieListPage } from "./pages";
+import SearchFormWrapper from "./components/Wrappers/SearchFormWrapper";
+import MovieDetailsWrapper from "./components/Wrappers/MovieDetailsWrapper";
+import { AddMovieForm, EditMovieForm } from "./components";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,7 +17,18 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<MovieListPage />}>
+            <Route path="/" element={<SearchFormWrapper />}>
+              <Route path="new" element={<AddMovieForm />} />
+            </Route>
+            <Route path="/:movieId" element={<MovieDetailsWrapper />}>
+              <Route path="edit" element={<EditMovieForm />} />
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>
 );

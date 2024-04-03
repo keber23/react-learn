@@ -24,6 +24,7 @@
 }
 
 .movieSearchContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,4 +47,23 @@
   padding: 10px;
   gap: 30px;
   justify-content: center;
+}
+
+.topRight {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.addButton {
+  background-color: rgba(128, 128, 128, 0.3);
+  color: red;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.addButton:hover {
+  background-color: rgba(199, 192, 192, 0.3);
 }

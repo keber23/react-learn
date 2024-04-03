@@ -3,6 +3,7 @@ import {
   GenreSelect,
   MovieTile,
   Loader,
+  MoviesFound,
 } from "../../../components";
 
 import { genres } from "../../../components/GenreSelect/Component/GenreSelect";
@@ -50,8 +51,17 @@ export default function MovieListPage() {
     }
   };
 
-  function onMovieClick(movie: Movie | null): void {
-    navigate({ pathname: `/${movie?.id}`, search: searchParams.toString() });
+  function onMovieClick(movieId: number): void {
+    navigate({ pathname: `/${movieId}`, search: searchParams.toString() });
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  function onMovieEdit(movieId: number): void {
+    navigate({ pathname: `/${movieId}/edit`, search: searchParams.toString() });
   }
 
   const renderMovieTiles = (movies: Movie[] | undefined) => {
@@ -59,8 +69,8 @@ export default function MovieListPage() {
       <MovieTile
         key={movie.id}
         movie={movie}
-        onClick={() => onMovieClick(movie)}
-        onEdit={() => {}}
+        onClick={() => onMovieClick(movie.id!)}
+        onEdit={() => onMovieEdit(movie.id!)}
         onDelete={() => {}}
       />
     ));
@@ -80,6 +90,7 @@ export default function MovieListPage() {
           onSelectionChange={handleSortChange}
         />
       </div>
+      <MoviesFound count={data?.length} />
       <div className={styles.movieListContainer}>
         {isLoading ? <Loader /> : renderMovieTiles(data)}
       </div>
