@@ -42,7 +42,9 @@ const Dialog: React.FC<DialogProps> = ({ title, onClose, children }) => {
       <div className={styles.overlay}>
         <div className={styles.dialog} ref={dialogRef}>
           <div className={styles.header}>
-            <div className={styles.title}>{title}</div>
+            <div className={styles.title} data-cy="dialogTitle">
+              {title}
+            </div>
             <button
               data-testid="close-button"
               className={styles.closeButton}

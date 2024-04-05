@@ -173,7 +173,11 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
               </button>
             </div>
             <div className={styles["col-25"]}>
-              <button type="submit" className={styles.btnSubmit}>
+              <button
+                type="submit"
+                className={styles.btnSubmit}
+                data-cy="formSubmitButton"
+              >
                 Submit
               </button>
             </div>
