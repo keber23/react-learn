@@ -7,25 +7,29 @@ import useMovieQuery from "../../../hooks/useMovieQuery";
 export default function EditMovieForm() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { mutate, data, isSuccess } = useAddUpdateMovieQuery();
+  const { mutate, data, isSuccess, error, isError } = useAddUpdateMovieQuery();
 
   let { movieId } = useParams();
 
   const { data: movie } = useMovieQuery(movieId as string);
 
-  function hideDialogAddMovie(): void {
+  const hideDialogAddMovie = () => {
     navigate({ pathname: `/${movieId}`, search: searchParams.toString() });
-  }
+  };
 
-  function onSubmitMovie(movie: Movie) {
+  const onSubmitMovie = (movie: Movie) => {
     mutate(movie);
-  }
+  };
 
   if (isSuccess) {
     navigate({
       pathname: `/${data?.id}`,
       search: searchParams.toString(),
     });
+  }
+
+  if (isError) {
+    throw new Error("oh dang!");
   }
 
   return (

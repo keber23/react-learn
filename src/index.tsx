@@ -4,7 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { MovieListPage } from "./pages";
+import { ErrorPage, MovieListPage } from "./pages";
 import SearchFormWrapper from "./components/Wrappers/SearchFormWrapper";
 import MovieDetailsWrapper from "./components/Wrappers/MovieDetailsWrapper";
 import { AddMovieForm, EditMovieForm } from "./components";
@@ -19,7 +19,7 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route element={<MovieListPage />}>
+          <Route element={<MovieListPage />} errorElement={<ErrorPage />}>
             <Route path="/" element={<SearchFormWrapper />}>
               <Route path="new" element={<AddMovieForm />} />
             </Route>

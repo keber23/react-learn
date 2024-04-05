@@ -6,11 +6,11 @@ import useAddUpdateMovieQuery from "../../../hooks/useAddUpdateMovieQuery";
 export default function AddMovieForm() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { mutate, data, isSuccess } = useAddUpdateMovieQuery();
+  const { mutate, data, isSuccess, error, isError } = useAddUpdateMovieQuery();
 
-  function hideDialogAddMovie(): void {
+  const hideDialogAddMovie = () => {
     navigate({ pathname: `/`, search: searchParams.toString() });
-  }
+  };
 
   if (isSuccess) {
     navigate({
@@ -19,9 +19,13 @@ export default function AddMovieForm() {
     });
   }
 
-  function onSubmitMovie(movie: Movie) {
-    mutate(movie);
+  if (isError) {
+    throw new Error("oh dang!");
   }
+
+  const onSubmitMovie = (movie: Movie) => {
+    mutate(movie);
+  };
 
   return (
     <Dialog title="ADD MOVIE" onClose={hideDialogAddMovie}>

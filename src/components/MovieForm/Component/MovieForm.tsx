@@ -15,10 +15,18 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
     formState: { errors },
   } = useForm<Movie>();
 
+  const submitMovieForm = async (movie: Movie) => {
+    await onSubmit(movie);
+  };
+
+  const urlRegex =
+    /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)/;
+  const requiedMessage = "This field is required";
+  const emptyString = "";
   return (
     <>
       <div className={styles.container}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(submitMovieForm)}>
           <div className={styles.row}>
             <div className={styles["col-50"]}>
               <label htmlFor="title">TITLE</label>
@@ -27,11 +35,13 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
                 type="text"
                 defaultValue={initialMovie?.title}
                 placeholder="Movie title"
-                {...register("title", { required: "This field is required" })}
-                className={errors.title ? styles.errorInput : undefined}
+                {...register("title", { required: requiedMessage })}
+                className={errors.title ? styles.errorInput : emptyString}
               />
               {errors.title && (
-                <p className={styles.error}>{errors.title.message}</p>
+                <p className={styles.error} role="alert">
+                  {errors.title.message}
+                </p>
               )}
               <label htmlFor="movieUrl">MOVIE URL</label>
               <input
@@ -40,17 +50,18 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
                 defaultValue={initialMovie?.poster_path}
                 placeholder="https://"
                 {...register("poster_path", {
-                  required: "This field is required",
+                  required: requiedMessage,
                   pattern: {
-                    value:
-                      /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)/,
+                    value: urlRegex,
                     message: "Invalid URL",
                   },
                 })}
-                className={errors.poster_path ? styles.errorInput : undefined}
+                className={errors.poster_path ? styles.errorInput : emptyString}
               />
               {errors.poster_path && (
-                <p className={styles.error}>{errors.poster_path.message}</p>
+                <p className={styles.error} role="alert">
+                  {errors.poster_path.message}
+                </p>
               )}
               <label htmlFor="genre">GENRE</label>
               <select
@@ -60,9 +71,9 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
                   return x.toLowerCase();
                 })}
                 {...register("genres", {
-                  required: "This field is required",
+                  required: requiedMessage,
                 })}
-                className={errors.genres ? styles.errorInput : undefined}
+                className={errors.genres ? styles.errorInput : emptyString}
               >
                 {genres
                   .filter((genre) => genre !== "ALL")
@@ -73,7 +84,9 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
                   ))}
               </select>
               {errors.genres && (
-                <p className={styles.error}>{errors.genres.message}</p>
+                <p className={styles.error} role="alert">
+                  {errors.genres.message}
+                </p>
               )}
             </div>
 
@@ -85,12 +98,16 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
                 defaultValue={initialMovie?.release_date}
                 placeholder="Select Date"
                 {...register("release_date", {
-                  required: "This field is required",
+                  required: requiedMessage,
                 })}
-                className={errors.release_date ? styles.errorInput : undefined}
+                className={
+                  errors.release_date ? styles.errorInput : emptyString
+                }
               />
               {errors.release_date && (
-                <p className={styles.error}>{errors.release_date.message}</p>
+                <p className={styles.error} role="alert">
+                  {errors.release_date.message}
+                </p>
               )}
               <label htmlFor="rating">RATING</label>
               <input
@@ -98,13 +115,17 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
                 type="number"
                 defaultValue={initialMovie?.vote_average?.toString()}
                 {...register("vote_average", {
-                  required: "This field is required",
+                  required: requiedMessage,
                   valueAsNumber: true,
                 })}
-                className={errors.vote_average ? styles.errorInput : undefined}
+                className={
+                  errors.vote_average ? styles.errorInput : emptyString
+                }
               />
               {errors.vote_average && (
-                <p className={styles.error}>{errors.vote_average.message}</p>
+                <p className={styles.error} role="alert">
+                  {errors.vote_average.message}
+                </p>
               )}
               <label htmlFor="runtime">RUNTIME</label>
               <input
@@ -113,13 +134,15 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
                 defaultValue={initialMovie?.runtime?.toString()}
                 placeholder="minutes"
                 {...register("runtime", {
-                  required: "This field is required",
+                  required: requiedMessage,
                   valueAsNumber: true,
                 })}
-                className={errors.runtime ? styles.errorInput : undefined}
+                className={errors.runtime ? styles.errorInput : emptyString}
               />
               {errors.runtime && (
-                <p className={styles.error}>{errors.runtime.message}</p>
+                <p className={styles.error} role="alert">
+                  {errors.runtime.message}
+                </p>
               )}
             </div>
           </div>
@@ -131,12 +154,14 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
                 defaultValue={initialMovie?.overview}
                 placeholder="Movie overview"
                 {...register("overview", {
-                  required: "This field is required",
+                  required: requiedMessage,
                 })}
-                className={errors.overview ? styles.errorInput : undefined}
+                className={errors.overview ? styles.errorInput : emptyString}
               ></textarea>
               {errors.overview && (
-                <p className={styles.error}>{errors.overview.message}</p>
+                <p className={styles.error} role="alert">
+                  {errors.overview.message}
+                </p>
               )}
             </div>
           </div>

@@ -4,25 +4,25 @@ import { Movie } from "../types";
 
 const useAddUpdateMovieQuery = () => {
   const queryClient = useQueryClient();
+  const apiUrl = "http://localhost:4000/movies";
 
-  const { mutate, isLoading, data, error, isSuccess } = useMutation({
+  const { mutate, isLoading, data, error, isSuccess, isError } = useMutation({
     mutationFn: (movie: Movie) => {
       if (movie.id) {
-        return axios
-          .put<Movie>("http://localhost:4000/movies", movie)
-          .then((res) => res.data);
+        return axios.put<Movie>(apiUrl, movie).then((res) => res.data);
       } else {
-        return axios
-          .post<Movie>("http://localhost:4000/movies", movie)
-          .then((res) => res.data);
+        return axios.post<Movie>(apiUrl, movie).then((res) => res.data);
       }
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries();
     },
+    onError: (error) => {
+      console.log(error);
+    },
   });
 
-  return { mutate, isLoading, data, error, isSuccess };
+  return { mutate, isLoading, data, error, isSuccess, isError };
 };
 
 export default useAddUpdateMovieQuery;
