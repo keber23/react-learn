@@ -7,3 +7,6 @@ export { default as SortControl } from "./SortControl/Component/SortControl";
 export { default as Dialog } from "./Dialog/Component/Dialog";
 export { default as MovieForm } from "./MovieForm/Component/MovieForm";
 export { default as Loader } from "./Loader/Component/Loader";
+export { default as MoviesFound } from "./MoviesFound/Component/MoviesFound";
+export { default as AddMovieForm } from "./AddMovieForm/Component/AddMovieForm";
+export { default as EditMovieForm } from "./EditMovieForm/Component/EditMovieForm";

@@ -1,7 +1,7 @@
-import React from "react";
 import styles from "../Styles/MovieForm.module.css";
 import { Movie } from "../../../types/movie";
 import { genres } from "../../GenreSelect/Component/GenreSelect";
+import { useForm } from "react-hook-form";
 
 interface MovieFormProps {
   initialMovie?: Movie;
@@ -9,54 +9,71 @@ interface MovieFormProps {
 }
 
 const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const movie: Movie = {
-      title: formData.get("title") as string,
-      poster_path: formData.get("movieUrl") as string,
-      genres: Array.from(formData.getAll("genre") as Iterable<string>),
-      release_date: formData.get("releaseDate") as string,
-      vote_average: parseFloat(formData.get("rating") as string),
-      runtime: parseInt(formData.get("runtime") as string),
-      overview: formData.get("overview") as string,
-    };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Movie>();
 
-    onSubmit(movie);
+  const submitMovieForm = async (movie: Movie) => {
+    await onSubmit(movie);
   };
 
+  const urlRegex =
+    /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)/;
+  const requiedMessage = "This field is required";
+  const emptyString = "";
   return (
     <>
       <div className={styles.container}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(submitMovieForm)}>
           <div className={styles.row}>
             <div className={styles["col-50"]}>
               <label htmlFor="title">TITLE</label>
               <input
                 id="title"
                 type="text"
-                name="title"
                 defaultValue={initialMovie?.title}
                 placeholder="Movie title"
+                {...register("title", { required: requiedMessage })}
+                className={errors.title ? styles.errorInput : emptyString}
               />
-
+              {errors.title && (
+                <p className={styles.error} role="alert">
+                  {errors.title.message}
+                </p>
+              )}
               <label htmlFor="movieUrl">MOVIE URL</label>
               <input
                 id="movieUrl"
                 type="text"
-                name="movieUrl"
                 defaultValue={initialMovie?.poster_path}
                 placeholder="https://"
+                {...register("poster_path", {
+                  required: requiedMessage,
+                  pattern: {
+                    value: urlRegex,
+                    message: "Invalid URL",
+                  },
+                })}
+                className={errors.poster_path ? styles.errorInput : emptyString}
               />
-
+              {errors.poster_path && (
+                <p className={styles.error} role="alert">
+                  {errors.poster_path.message}
+                </p>
+              )}
               <label htmlFor="genre">GENRE</label>
               <select
                 multiple
                 id="genre"
-                name="genre"
                 defaultValue={initialMovie?.genres?.map(function (x) {
                   return x.toLowerCase();
                 })}
+                {...register("genres", {
+                  required: requiedMessage,
+                })}
+                className={errors.genres ? styles.errorInput : emptyString}
               >
                 {genres
                   .filter((genre) => genre !== "ALL")
@@ -66,6 +83,11 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
                     </option>
                   ))}
               </select>
+              {errors.genres && (
+                <p className={styles.error} role="alert">
+                  {errors.genres.message}
+                </p>
+              )}
             </div>
 
             <div className={styles["col-50"]}>
@@ -73,27 +95,55 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
               <input
                 id="releaseDate"
                 type="date"
-                name="releaseDate"
                 defaultValue={initialMovie?.release_date}
                 placeholder="Select Date"
+                {...register("release_date", {
+                  required: requiedMessage,
+                })}
+                className={
+                  errors.release_date ? styles.errorInput : emptyString
+                }
               />
-
+              {errors.release_date && (
+                <p className={styles.error} role="alert">
+                  {errors.release_date.message}
+                </p>
+              )}
               <label htmlFor="rating">RATING</label>
               <input
                 id="rating"
                 type="number"
-                name="rating"
                 defaultValue={initialMovie?.vote_average?.toString()}
+                {...register("vote_average", {
+                  required: requiedMessage,
+                  valueAsNumber: true,
+                })}
+                className={
+                  errors.vote_average ? styles.errorInput : emptyString
+                }
               />
-
+              {errors.vote_average && (
+                <p className={styles.error} role="alert">
+                  {errors.vote_average.message}
+                </p>
+              )}
               <label htmlFor="runtime">RUNTIME</label>
               <input
                 id="runtime"
                 type="number"
-                name="runtime"
                 defaultValue={initialMovie?.runtime?.toString()}
                 placeholder="minutes"
+                {...register("runtime", {
+                  required: requiedMessage,
+                  valueAsNumber: true,
+                })}
+                className={errors.runtime ? styles.errorInput : emptyString}
               />
+              {errors.runtime && (
+                <p className={styles.error} role="alert">
+                  {errors.runtime.message}
+                </p>
+              )}
             </div>
           </div>
           <div className={styles.row}>
@@ -101,10 +151,18 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
               <label htmlFor="overview">OVERVIEW</label>
               <textarea
                 id="overview"
-                name="overview"
                 defaultValue={initialMovie?.overview}
                 placeholder="Movie overview"
+                {...register("overview", {
+                  required: requiedMessage,
+                })}
+                className={errors.overview ? styles.errorInput : emptyString}
               ></textarea>
+              {errors.overview && (
+                <p className={styles.error} role="alert">
+                  {errors.overview.message}
+                </p>
+              )}
             </div>
           </div>
           <div className={styles.row}>
@@ -115,11 +173,24 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
               </button>
             </div>
             <div className={styles["col-25"]}>
-              <button type="submit" className={styles.btnSubmit}>
+              <button
+                type="submit"
+                className={styles.btnSubmit}
+                data-cy="formSubmitButton"
+              >
                 Submit
               </button>
             </div>
           </div>
+          {initialMovie?.id && (
+            <input
+              type="hidden"
+              {...register("id", {
+                value: initialMovie?.id,
+                valueAsNumber: true,
+              })}
+            />
+          )}
         </form>
       </div>
     </>
